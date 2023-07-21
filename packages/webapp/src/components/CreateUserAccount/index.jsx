@@ -18,21 +18,22 @@ export default function PureCreateUserAccount({ onSignUp, email, onGoBack }) {
     watch,
     control,
     setValue,
-
+    
     formState: { isDirty, isValid, errors },
   } = useForm({
     mode: 'onTouched',
   });
-
+  
   const NAME = 'name';
   const GENDER = 'gender';
   const LANGUAGE = 'language';
   const BIRTHYEAR = 'birth_year';
   const PASSWORD = 'password';
+  const PHONE = 'phone_number';
   const password = watch(PASSWORD, undefined);
   const { t } = useTranslation(['translation', 'common', 'gender']);
   const title = t('CREATE_USER.TITLE');
-
+  
   const {
     isValid: isPasswordValid,
     hasNoSymbol,
@@ -40,47 +41,47 @@ export default function PureCreateUserAccount({ onSignUp, email, onGoBack }) {
     hasNoUpperCase,
     isTooShort,
   } = validatePasswordWithErrors(password);
-
+  
   const genderOptions = [
     { value: 'MALE', label: t('gender:MALE') },
     { value: 'FEMALE', label: t('gender:FEMALE') },
     { value: 'OTHER', label: t('gender:OTHER') },
     { value: 'PREFER_NOT_TO_SAY', label: t('gender:PREFER_NOT_TO_SAY') },
   ];
-
+  
   const languageOptions = [
     { value: 'en', label: t('PROFILE.ACCOUNT.ENGLISH') },
     { value: 'es', label: t('PROFILE.ACCOUNT.SPANISH') },
     { value: 'pt', label: t('PROFILE.ACCOUNT.PORTUGUESE') },
     { value: 'fr', label: t('PROFILE.ACCOUNT.FRENCH') },
   ];
-
+  
   const getLanguageOption = (language) => {
     return languageOptions.findIndex((object) => object.value === language);
   };
-
+  
   const browser_langauge = navigator.language.includes('-')
     ? navigator.language.split('-')[0]
     : navigator.language;
-
+  
   const [language, setLanguage] = useState(browser_langauge);
   const [languageOption, setLanguageOption] = useState(getLanguageOption(language));
-
+  
   useEffect(() => {
     setLanguageOption(getLanguageOption(language));
     i18n.changeLanguage(language);
     localStorage.setItem('litefarm_lang', language);
   }, [language]);
-
+  
   const disabled = !isDirty || !isValid || !isPasswordValid;
-
+  
   const onSubmit = (data) => {
     data[GENDER] = data?.[GENDER]?.value || 'PREFER_NOT_TO_SAY';
     data[LANGUAGE] = data?.[LANGUAGE]?.value || t('INVITE_USER.DEFAULT_LANGUAGE_VALUE');
     onSignUp({ ...data, email });
   };
   const onError = (data) => {};
-
+  
   return (
     <Form
       onSubmit={handleSubmit(onSubmit, onError)}
@@ -89,7 +90,7 @@ export default function PureCreateUserAccount({ onSignUp, email, onGoBack }) {
           <Button onClick={onGoBack} color={'secondary'} type={'button'} fullLength>
             {t('common:BACK')}
           </Button>
-          <Button data-cy="createUser-create" disabled={disabled} type={'submit'} fullLength>
+          <Button data-cy='createUser-create' disabled={disabled} type={'submit'} fullLength>
             {t('CREATE_USER.CREATE_BUTTON')}
           </Button>
         </>
@@ -97,14 +98,23 @@ export default function PureCreateUserAccount({ onSignUp, email, onGoBack }) {
     >
       <Title style={{ marginBottom: '32px' }}>{title}</Title>
       <Input
-        data-cy="createUser-email"
+        data-cy='createUser-email'
         style={{ marginBottom: '28px' }}
         label={t('CREATE_USER.EMAIL')}
         disabled
         defaultValue={email}
       />
       <Input
-        data-cy="createUser-fullName"
+        data-cy='createUser-phoneNumber'
+        style={{ marginBottom: '24px' }}
+        label={t('CREATE_USER.PHONE')}
+        type={'number'}
+        onKeyPress={integerOnKeyDown}
+        hookFormRegister={register(PHONE, { required: true })}
+        errors={errors[PHONE] && (errors[PHONE].message || t('INVITE_USER.PHONE_ERROR'))}
+      />
+      <Input
+        data-cy='createUser-fullName'
         style={{ marginBottom: '28px' }}
         label={t('CREATE_USER.FULL_NAME')}
         placeholder={'e.g. Juan Perez'}
@@ -115,7 +125,7 @@ export default function PureCreateUserAccount({ onSignUp, email, onGoBack }) {
         name={GENDER}
         render={({ field: { onChange, onBlur, value } }) => (
           <ReactSelect
-            data-cy="createUser-gender"
+            data-cy='createUser-gender'
             label={t('CREATE_USER.GENDER')}
             options={genderOptions}
             onChange={onChange}
@@ -127,30 +137,30 @@ export default function PureCreateUserAccount({ onSignUp, email, onGoBack }) {
         )}
       />
       <Controller
-        data-cy="createUser-language"
+        data-cy='createUser-language'
         control={control}
         name={LANGUAGE}
         render={({ field: { onChange, onBlur, value } }) => (
           value && setLanguage(value.value),
-          (
-            <ReactSelect
-              label={t('CREATE_USER.LANGUAGE_PREFERENCE')}
-              options={languageOptions}
-              onChange={onChange}
-              value={languageOptions[languageOption]}
-              style={{ marginBottom: '28px' }}
-              defaultValue={{
-                value: t('CREATE_USER.DEFAULT_LANGUAGE_VALUE'),
-                label: t('CREATE_USER.DEFAULT_LANGUAGE'),
-              }}
-            />
-          )
+            (
+              <ReactSelect
+                label={t('CREATE_USER.LANGUAGE_PREFERENCE')}
+                options={languageOptions}
+                onChange={onChange}
+                value={languageOptions[languageOption]}
+                style={{ marginBottom: '28px' }}
+                defaultValue={{
+                  value: t('CREATE_USER.DEFAULT_LANGUAGE_VALUE'),
+                  label: t('CREATE_USER.DEFAULT_LANGUAGE'),
+                }}
+              />
+            )
         )}
       />
       <Input
-        data-cy="createUser-birthYear"
+        data-cy='createUser-birthYear'
         label={t('CREATE_USER.BIRTH_YEAR')}
-        type="number"
+        type='number'
         onKeyPress={integerOnKeyDown}
         hookFormRegister={register(BIRTHYEAR, {
           min: 1900,
@@ -167,7 +177,7 @@ export default function PureCreateUserAccount({ onSignUp, email, onGoBack }) {
         optional
       />
       <Input
-        data-cy="createUser-password"
+        data-cy='createUser-password'
         style={{ marginBottom: '28px' }}
         label={t('CREATE_USER.PASSWORD')}
         type={PASSWORD}

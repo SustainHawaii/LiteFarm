@@ -99,6 +99,10 @@ export default function PureNavBar({
   history,
   showFinances,
   defaultOpenFloater,
+  showFarm = true,
+  showTasks = true,
+  intro = false,
+  
 }) {
   const classes = useStyles();
   const { t } = useTranslation([
@@ -128,7 +132,7 @@ export default function PureNavBar({
     setManageOpen(!manageOpen);
   };
   const selectedLanguage = getLanguageFromLocalStorage();
-
+  
   //Floater
   const [openFloater, setOpenFloater] = useState(defaultOpenFloater);
   const [FARM, NOTIFICATION, PROFILE] = ['farm', 'notification', 'profile'];
@@ -142,7 +146,7 @@ export default function PureNavBar({
   const notificationIconClick = () => {
     closeFloater();
     const url = '/notifications';
-    if (history.location.pathname === url) {
+    if(history.location.pathname === url) {
       // TODO click should update contents; is there better way than full page refresh?
       history.go(0);
     } else {
@@ -157,7 +161,7 @@ export default function PureNavBar({
   const onClickAway = () => {
     setOpenFloater(null);
   };
-
+  
   const farmInfoClick = () => {
     history.push({
       pathname: '/farm',
@@ -178,7 +182,7 @@ export default function PureNavBar({
     history.push('/certification');
     closeFloater();
   };
-
+  
   //PureProfileFloater
   const helpClick = () => {
     history.push('/help');
@@ -202,22 +206,22 @@ export default function PureNavBar({
       pt: 'PLDRpVZ4VsXJg0ke20m47MmJq6uAJAlAGF',
       en: 'PLDRpVZ4VsXJgVGrmmXJooNqceXvre8IDY',
     };
-
+    
     const playList = playlistIDs[selectedLanguage] || playlistIDs['en'];
     const url = 'https://www.youtube.com/playlist?list=' + playList;
-
+    
     const win = window.open(url, '_blank');
     win.focus();
     closeFloater();
   };
-
+  
   // Pure Notification Floater
   const notificationTeaserClick = () => {
     closeFloater();
   };
-
+  
   const getLanguageFarmIcon = (language) => {
-    switch (language) {
+    switch(language) {
       case 'pt':
         return <MyFarmIconPort />;
       case 'es':
@@ -228,20 +232,20 @@ export default function PureNavBar({
         return <MyFarmIcon />;
     }
   };
-
+  
   return (
-    <AppBar position="sticky" className={classes.appBar}>
+    <AppBar position='sticky' className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        <IconButton
-          data-cy="navbar-hamburger"
-          edge="start"
+        {!intro && <IconButton
+          data-cy='navbar-hamburger'
+          edge='start'
           className={classes.menuButton}
-          color="inherit"
-          aria-label="open drawer"
+          color='inherit'
+          aria-label='open drawer'
           onClick={burgerMenuOnClick}
         >
           <BiMenu className={classes.burgerMenu} />
-        </IconButton>
+        </IconButton>}
         <SwipeableDrawer
           anchor={'left'}
           open={isDrawerOpen}
@@ -259,26 +263,29 @@ export default function PureNavBar({
           />
         </SwipeableDrawer>
         <Logo history={history} />
-        {showNotification ? (
-          <NavBarNotificationSpotlightProvider open={showNotification} onFinish={resetSpotlight} />
-        ) : (
-          <NavbarSpotlightProvider open={showSpotLight} onFinish={resetSpotlight} />
-        )}
+        {!intro && <>
+          {showNotification ? (
+            <NavBarNotificationSpotlightProvider open={showNotification} onFinish={resetSpotlight} />
+          ) : (
+            <NavbarSpotlightProvider open={showSpotLight} onFinish={resetSpotlight} />
+          )}
+        </>}
         <ClickAwayListener onClickAway={onClickAway}>
           <div className={classes.icons}>
+            {!intro &&
             <IconButton
-              data-cy="home-notificationButton"
-              aria-label="notification icon"
-              color="inherit"
-              id="zerothStepNavBar"
+              data-cy='home-notificationButton'
+              aria-label='notification icon'
+              color='inherit'
+              id='zerothStepNavBar'
               onClick={notificationIconClick}
               className={classes.iconButton}
               classes={{ root: classes.notificationButton }}
             >
               <NotificationIcon />
               <Alert />
-            </IconButton>
-
+            </IconButton>}
+            {showFarm &&
             <PureMyFarmFloater
               openProfile={isFarmFloaterOpen}
               farmInfoClick={farmInfoClick}
@@ -287,30 +294,31 @@ export default function PureNavBar({
               certificationClick={certificationClick}
             >
               <IconButton
-                data-cy="home-farmButton"
-                aria-label="farm-icon"
-                color="inherit"
-                id="firstStepNavBar"
+                data-cy='home-farmButton'
+                aria-label='farm-icon'
+                color='inherit'
+                id='firstStepNavBar'
                 className={classes.iconButton}
                 onClick={farmButtonOnClick}
               >
                 {getLanguageFarmIcon(selectedLanguage)}
               </IconButton>
-            </PureMyFarmFloater>
-
+            </PureMyFarmFloater>}
+            {showTasks &&
             <IconButton
-              data-cy="home-taskButton"
-              aria-label="notification icon"
-              color="inherit"
-              id="secondStepNavBar"
+              data-cy='home-taskButton'
+              aria-label='notification icon'
+              color='inherit'
+              id='secondStepNavBar'
               onClick={taskIconClick}
               className={classes.iconButton}
               classes={{ root: classes.notificationButton }}
             >
               <TaskIcon />
-            </IconButton>
-
+            </IconButton>}
+            
             <PureProfileFloater
+              intro={intro}
               openProfile={isProfileFloaterOpen}
               helpClick={helpClick}
               tutorialsClick={openTutorialsClick}
@@ -319,12 +327,12 @@ export default function PureNavBar({
               switchFarmClick={switchFarmClick}
             >
               <IconButton
-                data-cy="home-profileButton"
-                edge="end"
-                aria-label="profile icon"
-                color="inherit"
+                data-cy='home-profileButton'
+                edge='end'
+                aria-label='profile icon'
+                color='inherit'
                 onClick={profileButtonOnClick}
-                id="thirdStepNavBar"
+                id='thirdStepNavBar'
                 className={classes.iconButton}
                 classes={{ root: classes.profileButton }}
               >
@@ -345,7 +353,7 @@ const Logo = ({ history }) => {
     <img
       src={matches ? SmallLogo : SmallerLogo}
       style={{ marginLeft: matches ? 0 : '36px', cursor: 'pointer' }}
-      alt="Logo"
+      alt='Logo'
       onClick={() => history.push('/')}
     />
   );

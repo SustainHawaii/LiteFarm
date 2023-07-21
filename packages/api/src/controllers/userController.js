@@ -38,6 +38,7 @@ const userController = {
       password,
       gender,
       birth_year,
+      phone_number,
       language_preference,
     } = req.body;
     const userData = {
@@ -47,6 +48,7 @@ const userController = {
       gender,
       birth_year,
       language_preference,
+      phone_number : phone_number+'',
     };
 
     const trx = await transaction.start(Model.knex());

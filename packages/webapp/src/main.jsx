@@ -78,6 +78,7 @@ import { persistor, store } from './store/store';
 import { GlobalScss } from './components/GlobalScss';
 import irrigationTaskTypesSaga from './containers/Task/IrrigationTaskTypes/saga';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import chooseStoreSaga from './containers/StoreFront/saga'
 
 const clientId = import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID;
 
@@ -120,6 +121,7 @@ sagaMiddleware.run(financeSaga);
 sagaMiddleware.run(varietalSaga);
 sagaMiddleware.run(insightSaga);
 sagaMiddleware.run(chooseFarmSaga);
+sagaMiddleware.run(chooseStoreSaga);
 sagaMiddleware.run(certifierSurveySaga);
 sagaMiddleware.run(consentSaga);
 sagaMiddleware.run(loginSaga);

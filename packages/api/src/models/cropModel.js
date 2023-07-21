@@ -146,6 +146,7 @@ class Crop extends BaseModel {
         depletion_fraction: { type: 'number' },
         initial_kc: { type: 'number' },
         mid_kc: { type: 'number' },
+        fdc_id: { type: 'number' },
         end_kc: { type: 'number' },
         max_height: { type: 'number' },
         percentrefuse: { type: 'number' },

@@ -25,8 +25,8 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="21.555556"
-     inkscape:cx="18"
-     inkscape:cy="21.71134"
+     inkscape:cx="16.399484"
+     inkscape:cy="16.190721"
      inkscape:window-width="1920"
      inkscape:window-height="974"
      inkscape:window-x="-11"
@@ -40,13 +40,6 @@
      id="rect8418"
      x="-7.1279786e-08"
      y="0.13917518" />
-  <rect
-     x="4.9141817"
-     width="25.565201"
-     height="25.565201"
-     fill="#028577"
-     id="rect8440"
-     y="5.7989688" />
   <g
      id="g9005"
      transform="matrix(0.44479627,0,0,0.43062198,11.273321,10.802397)">
@@ -103,4 +96,28 @@
          x="-11.052012"
          y="17.926003">true wellth</tspan></text>
   </g>
+  <text
+     xml:space="preserve"
+     style="font-size:11.6442px;fill:#458f83;fill-opacity:1;stroke-width:0.308063"
+     x="0.41694209"
+     y="30.972197"
+     id="text471-2"
+     transform="scale(0.98811372,1.0120293)"><tspan
+       sodipodi:role="line"
+       id="tspan469-3"
+       style="fill:#458f83;fill-opacity:1;stroke-width:0.308063"
+       x="0.41694209"
+       y="30.972197">GRoW</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:33.3348px;fill:#458f83;fill-opacity:1;stroke-width:0.88193"
+     x="1.9065702"
+     y="25.576735"
+     id="text471-9"
+     transform="scale(1.1771946,0.84947723)"><tspan
+       sodipodi:role="line"
+       id="tspan469-0"
+       style="fill:#458f83;fill-opacity:1;stroke-width:0.88193"
+       x="1.9065702"
+       y="25.576735">G</tspan></text>
 </svg>

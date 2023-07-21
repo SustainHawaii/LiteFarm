@@ -15,6 +15,7 @@ export function PureProfileFloaterComponent({
   onHelp,
   onTutorials,
   onLogout,
+  intro = false,
 }) {
   const { t } = useTranslation();
   return (
@@ -26,23 +27,24 @@ export function PureProfileFloaterComponent({
         borderRadius: '4px',
       }}
     >
+      
       <ListOption clickFn={onInfo} iconText={t('PROFILE_FLOATER.INFO')} icon={<MyInfoIcon />} />
-
+      {!intro &&
       <ListOption
         clickFn={onSwitchFarm}
         iconText={t('PROFILE_FLOATER.SWITCH')}
         icon={<SwitchFarmIcon style={{ transform: 'translateX(1px)' }} />}
       />
-
+      }
       <ListOption clickFn={onHelp} iconText={t('PROFILE_FLOATER.HELP')} icon={<HelpIcon />} />
-
+      
       <ListOption
         clickFn={onTutorials}
         iconText={t('PROFILE_FLOATER.TUTORIALS')}
         icon={<VideoIcon />}
         isExternalLink
       />
-
+      
       <ListOption
         clickFn={onLogout}
         iconText={t('PROFILE_FLOATER.LOG_OUT')}
@@ -61,11 +63,13 @@ export default function PureProfileFloater({
   logOutClick,
   switchFarmClick,
   tutorialsClick,
+  intro = false,
 }) {
   return (
     <Floater
       body={
         <PureProfileFloaterComponent
+          intro={intro}
           onHelp={helpClick}
           onInfo={myInfoClick}
           onLogout={logOutClick}

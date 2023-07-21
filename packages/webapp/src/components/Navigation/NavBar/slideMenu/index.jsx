@@ -40,7 +40,7 @@ function SlideMenu({ history, manageOpen, closeDrawer, toggleManage, showFinance
   };
   const isAdmin = useSelector(isAdminSelector);
   return (
-    <div role="presentation" className={classes.container}>
+    <div role='presentation' className={classes.container}>
       <List>
         <Logo onClick={() => handleClick('/')} alt={'logo'} className={classes.logo} />
         <ListItem className={classes.listItem} button onClick={toggleManage}>
@@ -74,6 +74,18 @@ function SlideMenu({ history, manageOpen, closeDrawer, toggleManage, showFinance
               <ListItem
                 className={classes.subListItem}
                 button
+                onClick={() => handleClick('/store_front')}
+              >
+                <ListItemText
+                  classes={{ primary: classes.subListItemText }}
+                  primary={t('SLIDE_MENU.STORE_FRONT')}
+                />
+              </ListItem>
+            )}
+            {isAdmin && (
+              <ListItem
+                className={classes.subListItem}
+                button
                 onClick={() => handleClick('/documents')}
               >
                 <ListItemText
@@ -92,7 +104,7 @@ function SlideMenu({ history, manageOpen, closeDrawer, toggleManage, showFinance
             />
           </ListItem>
         )}
-
+        
         <ListItem className={classes.listItem} button onClick={() => handleClick('/Insights')}>
           <ListItemText
             classes={{ primary: classes.ListItemText }}

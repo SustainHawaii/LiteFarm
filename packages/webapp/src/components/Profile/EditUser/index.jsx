@@ -40,7 +40,7 @@ export default function PureEditUser({
   };
   const userFarms = useSelector(userFarmsByFarmSelector);
   const adminRoles = [1, 2, 5];
-
+  
   const genderOptions = [
     { value: 'MALE', label: t('gender:MALE') },
     { value: 'FEMALE', label: t('gender:FEMALE') },
@@ -61,9 +61,9 @@ export default function PureEditUser({
   const roleOption = isPseudoUser
     ? { value: 3, label: dropDownMap[3] }
     : { value: userFarm.role_id, label: dropDownMap[userFarm.role_id] };
-
+  
   const getDefaultGender = () => {
-    switch (userFarm.gender) {
+    switch(userFarm.gender) {
       case 'MALE':
         return genderOptions[0];
       case 'FEMALE':
@@ -74,18 +74,18 @@ export default function PureEditUser({
         return genderOptions[3];
     }
   };
-
+  
   const isUserLastAdmin = () => {
-    if (userFarm.status === 'Invited') return false;
-
+    if(userFarm.status === 'Invited') return false;
+    
     let adminCount = 0;
     userFarms.forEach((user) => {
-      if (adminRoles.includes(user.role_id) && user.status === 'Active') adminCount++;
+      if(adminRoles.includes(user.role_id) && user.status === 'Active') adminCount++;
     });
-
+    
     return adminCount === 1 && adminRoles.includes(userFarm.role_id);
   };
-
+  
   const {
     register,
     handleSubmit,
@@ -99,7 +99,7 @@ export default function PureEditUser({
     defaultValues: { ...userFarm, role_id: roleOption, gender: getDefaultGender() },
     shouldUnregister: true,
   });
-
+  
   const [showRevokeUserAccessModal, setShowRevokeUserAccessModal] = useState();
   const [showInvalidRevokeUserAccessModal, setShowInvalidRevokeUserAccessModal] = useState(false);
   const [shouldInvitePseudoUser, setShouldInvitePseudoUser] = useState(false);
@@ -130,14 +130,14 @@ export default function PureEditUser({
       Object.keys(errors).length,
     ],
   );
-
+  
   const onSubmit = (data) => {
     data[GENDER] = data?.[GENDER]?.value || 'PREFER_NOT_TO_SAY';
     data[ROLE] = data?.[ROLE]?.value;
     data[LANGUAGE] = data?.[LANGUAGE]?.value || t('INVITE_USER.DEFAULT_LANGUAGE_VALUE');
     onInvite({ ...data, email });
   };
-
+  
   return (
     <Form
       onSubmit={handleSubmit(shouldInvitePseudoUser ? onSubmit : onUpdate, (e) => console.log(e))}
@@ -173,21 +173,21 @@ export default function PureEditUser({
         title={t('PROFILE.ACCOUNT.EDIT_USER')}
       />
       <Input
-        data-cy="editUser-firstName"
+        data-cy='editUser-firstName'
         label={t('PROFILE.ACCOUNT.FIRST_NAME')}
         value={userFarm.first_name}
         style={{ marginBottom: '24px' }}
         disabled
       />
       <Input
-        data-cy="editUser-lastName"
+        data-cy='editUser-lastName'
         label={t('PROFILE.ACCOUNT.LAST_NAME')}
         value={userFarm.last_name}
         style={{ marginBottom: '24px' }}
         disabled
       />
       <Input
-        data-cy="editUser-email"
+        data-cy='editUser-email'
         label={t('INVITE_USER.EMAIL')}
         hookFormRegister={register(EMAIL, {
           required: true,
@@ -197,7 +197,7 @@ export default function PureEditUser({
           },
           validate: {
             existing: (value) => {
-              if (!shouldInvitePseudoUser) {
+              if(!shouldInvitePseudoUser) {
                 return true;
               } else {
                 return (
@@ -210,6 +210,13 @@ export default function PureEditUser({
         })}
         errors={getInputErrors(errors, EMAIL)}
         disabled={!shouldInvitePseudoUser}
+        style={{ marginBottom: '24px' }}
+      />
+      <Input
+        data-cy='editUser-phoneNumber'
+        label={t('INVITE_USER.PHONE')}
+        hookFormRegister={register(PHONE)}
+        disabled
         style={{ marginBottom: '24px' }}
       />
       {(!isPseudoUser || shouldInvitePseudoUser) && (
@@ -269,7 +276,7 @@ export default function PureEditUser({
       {isPseudoUser && shouldInvitePseudoUser && (
         <Input
           label={t('INVITE_USER.BIRTH_YEAR')}
-          type="number"
+          type='number'
           onKeyPress={integerOnKeyDown}
           hookFormRegister={register(BIRTHYEAR, {
             min: 1900,
@@ -288,10 +295,10 @@ export default function PureEditUser({
         />
       )}
       <Input
-        data-cy="editUser-wage"
+        data-cy='editUser-wage'
         label={t('INVITE_USER.WAGE')}
-        step="0.01"
-        type="number"
+        step='0.01'
+        type='number'
         hookFormRegister={register(WAGE, {
           min: { value: 0, message: t('INVITE_USER.WAGE_RANGE_ERROR') },
           valueAsNumber: true,
@@ -341,6 +348,6 @@ export default function PureEditUser({
 }
 PureEditUser.propTypes = {
   userFarm: PropTypes.object,
-
+  
   onSubmit: PropTypes.func,
 };

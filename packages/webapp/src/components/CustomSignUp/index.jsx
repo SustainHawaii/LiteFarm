@@ -1,6 +1,5 @@
 import styles from './styles.module.scss';
 import { ReactComponent as Logo } from '../../assets/images/signUp/logo.svg';
-import { ReactComponent as LineBreak } from '../../assets/images/signUp/lineBreak.svg';
 import Button from '../Form/Button';
 import Input from '../Form/Input';
 import React from 'react';
@@ -8,7 +7,6 @@ import Footer from '../Footer';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Error } from '../Typography';
-import { NewReleaseCard } from '../Card/NewReleaseCard/NewReleaseCard';
 
 const inputClasses = {
   container: {
@@ -33,7 +31,6 @@ export default function PureCustomSignUp({
       <div className={styles.lander}>
         <div className={styles.greetContainer}>
           <Logo />
-          <NewReleaseCard style={{ marginTop: '32px', maxWidth: '312px' }} />
           {(!isChrome || !!errorMessage) && (
             <div className={styles.otherBrowserMessageTop}>
               {!!errorMessage ? (
@@ -46,16 +43,10 @@ export default function PureCustomSignUp({
               )}
             </div>
           )}
-
-          <div data-cy="continueGoogle" className={styles.ssoButton}>
-            {GoogleLoginButton}
-          </div>
-          <div className={styles.lineBreak}>
-            <LineBreak />
-          </div>
-
+          
+          
           <div className={styles.continueButton}>
-            <Input data-cy="email" classes={inputClasses} {...inputs[0]} />
+            <Input data-cy='email' classes={inputClasses} {...inputs[0]} />
           </div>
         </div>
       </div>
@@ -69,9 +60,9 @@ export default function PureCustomSignUp({
               width: 312,
               height: 48,
             }}
-            type="submit"
+            type='submit'
             fullLength
-            data-cy="continue"
+            data-cy='continue'
           >
             {t('common:CONTINUE')}
           </Button>

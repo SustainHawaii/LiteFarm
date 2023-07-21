@@ -36,7 +36,7 @@ export const customSignUp = createAction(`customSignUpSaga`);
 export function* customSignUpSaga({ payload: { email } }) {
   try {
     const result = yield call(axios.get, loginUrl(email));
-    if (result.data.exists && !result.data.sso) {
+    if(result.data.exists && !result.data.sso) {
       localStorage.setItem('litefarm_lang', result.data.language);
       history.push(
         {
@@ -50,11 +50,11 @@ export function* customSignUpSaga({ payload: { email } }) {
           },
         },
       );
-    } else if (result.data.invited) {
+    } else if(result.data.invited) {
       yield put(setCustomSignUpErrorKey({ key: inlineErrors.invited }));
-    } else if (result.data.expired) {
+    } else if(result.data.expired) {
       yield put(setCustomSignUpErrorKey({ key: inlineErrors.expired }));
-    } else if (!result.data.exists && !result.data.sso) {
+    } else if(!result.data.exists && !result.data.sso) {
       history.push(
         {
           pathname: '/',
@@ -64,7 +64,7 @@ export function* customSignUpSaga({ payload: { email } }) {
           user: { email },
         },
       );
-    } else if (result.data.sso) {
+    } else if(result.data.sso) {
       yield put(setCustomSignUpErrorKey({ key: inlineErrors.sso }));
     }
   } catch (e) {
@@ -85,17 +85,17 @@ export function* customLoginWithPasswordSaga({ payload: { showPasswordError, ...
       user: user,
     };
     const result = yield call(axios.post, loginWithPasswordUrl(), data);
-
+    
     const {
       id_token,
       user: { user_id },
     } = result.data;
     localStorage.setItem('id_token', id_token);
-
+    
     yield put(loginSuccess({ user_id }));
     history.push('/farm_selection');
   } catch (e) {
-    if (e.response?.status === 401) {
+    if(e.response?.status === 401) {
       showPasswordError();
     } else {
       console.log(e);
@@ -108,7 +108,7 @@ export const customCreateUser = createAction(`customCreateUserSaga`);
 
 export function* customCreateUserSaga({ payload: data }) {
   try {
-    const { name, email, password, gender, birth_year } = data;
+    const { name, email, password, gender, birth_year, phone_number } = data;
     const { first_name, last_name } = getFirstNameLastName(name);
     const selectedLanguage = getLanguageFromLocalStorage();
     const language_preference = selectedLanguage.includes('-')
@@ -122,19 +122,20 @@ export function* customCreateUserSaga({ payload: data }) {
       gender,
       birth_year,
       language_preference,
+      phone_number,
     };
-
+    
     !reqBody.birth_year && delete reqBody.birth_year;
-
+    
     const result = yield call(axios.post, userUrl(), reqBody);
-
-    if (result) {
+    
+    if(result) {
       const {
         id_token,
         user: { user_id, language_preference },
       } = result.data;
       localStorage.setItem('id_token', id_token);
-
+      
       localStorage.setItem('litefarm_lang', language_preference);
       yield put(loginSuccess({ user_id }));
       history.push('/farm_selection');
@@ -150,7 +151,7 @@ export function* sendResetPasswordEmailSaga({ payload: email }) {
   try {
     const result = yield call(axios.post, resetPasswordUrl(), { email });
   } catch (e) {
-    if (e.response.data === 'Reached maximum number of available reset tokens') {
+    if(e.response.data === 'Reached maximum number of available reset tokens') {
       yield put(enqueueErrorSnackbar(i18n.t('message:USER.ERROR.MAX_RESET_EMAILS')));
     } else {
       yield put(enqueueErrorSnackbar(i18n.t('message:USER.ERROR.RESET_PASSWORD')));

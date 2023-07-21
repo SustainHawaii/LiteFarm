@@ -19,21 +19,22 @@ const VITE_NGROK_API = import.meta.env.VITE_NGROK_API;
 const ENV = import.meta.env;
 // handling ngrok
 const hostNameSplit = window.location.host.split('.');
-if (VITE_NGROK_API && hostNameSplit && hostNameSplit.length > 1 && hostNameSplit[1] === 'ngrok') {
+if(VITE_NGROK_API && hostNameSplit && hostNameSplit.length > 1 && hostNameSplit[1] === 'ngrok') {
   URI = VITE_NGROK_API;
-} else if (import.meta.env.VITE_API_URL?.length) {
+} else if(import.meta.env.VITE_API_URL?.length) {
   URI = import.meta.env.VITE_API_URL;
 } else {
-  if (VITE_ENV === 'development') {
+  if(VITE_ENV === 'development') {
     URI = window.location.href.replace(/3000.*/, '5000');
-  } else if (VITE_ENV === 'production') {
+  } else if(VITE_ENV === 'production') {
     URI = 'https://api.app.litefarm.org';
-  } else if (VITE_ENV === 'integration') {
+  } else if(VITE_ENV === 'integration') {
     URI = 'https://api.beta.litefarm.org';
   }
 }
 
 export const userUrl = `${URI}/user`;
+export const farmStoreUrl = `${URI}/store`;
 export const pseudoUserUrl = `${URI}/user/pseudo`;
 export const farmUrl = `${URI}/farm`;
 export const inviteUserUrl = `${URI}/user/invite`;
@@ -74,9 +75,12 @@ export const notificationsUrl = `${URI}/notification_user`;
 export const clearAlertsUrl = `${URI}/notification_user/clear_alerts`;
 export const sensorUrl = `${URI}/sensor`;
 export const url = URI;
+export const stripeRedirectUrl = import.meta.env.VITE_STRIPE_REDIRECT_URL;
 
 export default {
   userUrl,
+  farmStoreUrl,
+  stripeRedirectUrl,
   pseudoUserUrl,
   farmUrl,
   inviteUserUrl,

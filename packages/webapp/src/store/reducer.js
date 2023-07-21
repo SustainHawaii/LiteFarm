@@ -21,6 +21,7 @@ import insightReducer from '../containers/Insights/reducer';
 import financeReducer from '../containers/Finances/reducer';
 import certifierSurveyReducer from '../containers/OrganicCertifierSurvey/slice';
 import userFarmReducer from '../containers/userFarmSlice';
+import farmStoreReducer from '../containers/storeFrontSlice';
 import rolesReducer from '../containers/Profile/People/slice';
 import userLogReducer from '../containers/userLogSlice';
 import weatherReducer from '../containers/WeatherBoard/weatherSlice';
@@ -234,6 +235,9 @@ const tempStateReducer = combineReducers({
   offlineDetectorReducer,
 });
 
+const storeReducer = combineReducers({
+  farmStoreReducer,
+});
 // combine all reducers here and pass it to application
 const appReducer = combineReducers({
   profileForms: combineForms(
@@ -255,19 +259,21 @@ const appReducer = combineReducers({
   baseReducer,
   insightReducer,
   financeReducer,
+  storeReducer,
 });
 
 const rootReducer = (state, action) => {
-  if (state && action.type === ActionTypes.SWITCH_FARMS) {
+  
+  if(state && action.type === ActionTypes.SWITCH_FARMS) {
     // selectively only reset farmStateReducer state when switching farms
     const { farmStateReducer, ...otherReducers } = state;
     state = otherReducers;
   }
-  if (action.type === PURGE) {
+  if(action.type === PURGE) {
     // clear redux state
     state = undefined;
   }
-
+  
   return appReducer(state, action);
 };
 

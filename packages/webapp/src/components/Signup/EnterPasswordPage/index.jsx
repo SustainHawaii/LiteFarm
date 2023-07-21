@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { validatePasswordWithErrors } from '../utils';
 import { PasswordError } from '../../Form/Errors';
 import { useTranslation } from 'react-i18next';
-import { NewReleaseCard } from '../../Card/NewReleaseCard/NewReleaseCard';
 
 export default function PureEnterPasswordPage({
   title,
@@ -24,7 +23,7 @@ export default function PureEnterPasswordPage({
     handleSubmit,
     setError,
     watch,
-
+    
     formState: { errors },
   } = useForm();
   const PASSWORD = 'password';
@@ -49,13 +48,13 @@ export default function PureEnterPasswordPage({
   };
   const wrongBrowserTop = t('SIGNUP.WRONG_BROWSER');
   const wrongBrowserBottom = t('SIGNUP.WRONG_BROWSER_BOTTOM');
-
+  
   useEffect(() => {
-    if (isVisible) {
+    if(isVisible) {
       document.getElementById('password_input_to_focus')?.focus();
     }
   }, [isVisible]);
-
+  
   return (
     <Form
       onSubmit={handleSubmit(onSubmit, onError)}
@@ -65,7 +64,7 @@ export default function PureEnterPasswordPage({
             {t('common:BACK')}
           </Button>
           <Button
-            data-cy="enterPassword-submit"
+            data-cy='enterPassword-submit'
             type={'submit'}
             fullLength
             disabled={errors[PASSWORD] || !password}
@@ -76,7 +75,6 @@ export default function PureEnterPasswordPage({
       }
     >
       <Title style={{ marginBottom: '24px' }}>{title}</Title>
-      <NewReleaseCard style={{ marginBottom: '28px' }} />
       {!isChrome && (
         <div className={styles.otherBrowserMessageTop}>
           {wrongBrowserTop}
@@ -84,7 +82,7 @@ export default function PureEnterPasswordPage({
         </div>
       )}
       <Input
-        data-cy="enterPassword-password"
+        data-cy='enterPassword-password'
         style={{ marginBottom: '28px' }}
         label={t('ENTER_PASSWORD.LABEL')}
         type={PASSWORD}

@@ -28,6 +28,8 @@ import { userFarmSelector } from './containers/userFarmSlice';
 import { chooseFarmFlowSelector } from './containers/ChooseFarm/chooseFarmFlowSlice';
 import useScrollToTop from './containers/hooks/useScrollToTop';
 import { useReduxSnackbar } from './containers/Snackbar/useReduxSnackbar';
+import StoreFront from './containers/StoreFront';
+import StoreProduct from './containers/StoreProduct';
 
 //dynamic imports
 const Home = React.lazy(() => import('./containers/Home'));
@@ -79,7 +81,7 @@ const MapVideo = React.lazy(() => import('./components/Map/Videos'));
 const PostFarmSiteBoundaryForm = React.lazy(() =>
   import(
     './containers/LocationDetails/AreaDetails/FarmSiteBoundaryDetailForm/PostFarmSiteBoundary'
-  ),
+    ),
 );
 const FarmSiteBoundaryDetails = React.lazy(() => import('./routes/FarmSiteBoundaryDetailsRoutes'));
 
@@ -219,7 +221,7 @@ const CertifierSelectionMenu = React.lazy(() =>
 const SetCertificationSummary = React.lazy(() =>
   import(
     './containers/OrganicCertifierSurvey/SetCertificationSummary/UpdateSetCertificationSummary'
-  ),
+    ),
 );
 
 const RequestCertifier = React.lazy(() =>
@@ -323,33 +325,33 @@ const Routes = () => {
     userFarm;
   const hasSelectedFarm = !!farm_id;
   const hasFinishedOnBoardingFlow = step_one && step_four && step_five;
-  if (isAuthenticated()) {
+  if(isAuthenticated()) {
     role_id = Number(role_id);
     // TODO check every step
-    if (isInvitationFlow) {
+    if(isInvitationFlow) {
       return (
         <Suspense fallback={<Spinner />}>
           <Switch>
-            <Route path="/farm_selection" exact component={ChooseFarm} />
+            <Route path='/farm_selection' exact component={ChooseFarm} />
             <Route
-              path="/consent"
+              path='/consent'
               exact
               component={() => <ConsentForm goForwardTo={'/outro'} goBackTo={null} />}
             />
-            <Route path="/outro" exact component={JoinFarmSuccessScreen} />
+            <Route path='/outro' exact component={JoinFarmSuccessScreen} />
             {!has_consent && <Redirect to={'/consent'} />}
           </Switch>
         </Suspense>
       );
-    } else if (!hasSelectedFarm || !hasFinishedOnBoardingFlow) {
+    } else if(!hasSelectedFarm || !hasFinishedOnBoardingFlow) {
       return <OnboardingFlow {...userFarm} />;
-    } else if (!has_consent) {
+    } else if(!has_consent) {
       return (
         <Suspense fallback={<Spinner />}>
           <Switch>
-            <Route path="/farm_selection" exact component={ChooseFarm} />
+            <Route path='/farm_selection' exact component={ChooseFarm} />
             <Route
-              path="/consent"
+              path='/consent'
               exact
               component={() => <ConsentForm goForwardTo={'/'} goBackTo={null} />}
             />
@@ -357,290 +359,292 @@ const Routes = () => {
           </Switch>
         </Suspense>
       );
-    } else if (role_id === 1) {
+    } else if(role_id === 1) {
       return (
         <Suspense fallback={<Spinner />}>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/home" exact component={Home} />
-            <Route path="/profile" exact component={Account} />
-            <Route path="/people" exact component={People} />
-            <Route path="/farm" exact component={Farm} />
-            <Route path="/user/:user_id" exact component={EditUser} />
-            <Route path="/consent" exact component={ConsentForm} />
-            <Route path="/crop/new" exact component={AddNewCrop} />
-            <Route path="/crop/:crop_id/add_crop_variety" exact component={AddCrop} />
+            <Route path='/' exact component={Home} />
+            <Route path='/home' exact component={Home} />
+            <Route path='/profile' exact component={Account} />
+            <Route path='/people' exact component={People} />
+            <Route path='/farm' exact component={Farm} />
+            <Route path='/store_front' exact component={StoreFront} />
+            <Route path='/store_product' exact component={StoreProduct} />
+            <Route path='/user/:user_id' exact component={EditUser} />
+            <Route path='/consent' exact component={ConsentForm} />
+            <Route path='/crop/new' exact component={AddNewCrop} />
+            <Route path='/crop/:crop_id/add_crop_variety' exact component={AddCrop} />
             <Route
-              path="/crop/:crop_id/add_crop_variety/compliance"
+              path='/crop/:crop_id/add_crop_variety/compliance'
               exact
               component={ComplianceInfo}
             />
-            <Route path="/crop/:variety_id/detail" exact component={CropDetail} />
-            <Route path="/crop/:variety_id/management" exact component={CropManagement} />
-            <Route path="/crop/:variety_id/edit_crop_variety" exact component={EditCrop} />
+            <Route path='/crop/:variety_id/detail' exact component={CropDetail} />
+            <Route path='/crop/:variety_id/management' exact component={CropManagement} />
+            <Route path='/crop/:variety_id/edit_crop_variety' exact component={EditCrop} />
             <Route
-              path="/crop/:variety_id/add_management_plan/planted_already"
+              path='/crop/:variety_id/add_management_plan/planted_already'
               exact
               component={PlantedAlready}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/needs_transplant"
+              path='/crop/:variety_id/add_management_plan/needs_transplant'
               exact
               component={Transplant}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/plant_date"
+              path='/crop/:variety_id/add_management_plan/plant_date'
               exact
               component={PlantingDate}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/choose_initial_planting_location"
+              path='/crop/:variety_id/add_management_plan/choose_initial_planting_location'
               exact
               component={PlantingLocation}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/choose_final_planting_location"
+              path='/crop/:variety_id/add_management_plan/choose_final_planting_location'
               exact
               component={PlantingLocation}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/final_planting_method"
+              path='/crop/:variety_id/add_management_plan/final_planting_method'
               exact
               component={PlantingMethod}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_planting_method"
+              path='/crop/:variety_id/add_management_plan/initial_planting_method'
               exact
               component={PlantingMethod}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_broadcast_method"
+              path='/crop/:variety_id/add_management_plan/initial_broadcast_method'
               exact
               component={PlantBroadcast}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_container_method"
+              path='/crop/:variety_id/add_management_plan/initial_container_method'
               exact
               component={PlantInContainer}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_bed_method"
+              path='/crop/:variety_id/add_management_plan/initial_bed_method'
               exact
               component={BedPlan}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_bed_guidance"
+              path='/crop/:variety_id/add_management_plan/initial_bed_guidance'
               exact
               component={BedPlanGuidance}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_row_method"
+              path='/crop/:variety_id/add_management_plan/initial_row_method'
               exact
               component={RowMethod}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_row_guidance"
+              path='/crop/:variety_id/add_management_plan/initial_row_guidance'
               exact
               component={RowMethodGuidance}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/broadcast_method"
+              path='/crop/:variety_id/add_management_plan/broadcast_method'
               exact
               component={PlantBroadcast}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/container_method"
+              path='/crop/:variety_id/add_management_plan/container_method'
               exact
               component={PlantInContainer}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/bed_method"
+              path='/crop/:variety_id/add_management_plan/bed_method'
               exact
               component={BedPlan}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/bed_guidance"
+              path='/crop/:variety_id/add_management_plan/bed_guidance'
               exact
               component={BedPlanGuidance}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/row_method"
+              path='/crop/:variety_id/add_management_plan/row_method'
               exact
               component={RowMethod}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/row_guidance"
+              path='/crop/:variety_id/add_management_plan/row_guidance'
               exact
               component={RowMethodGuidance}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/name"
+              path='/crop/:variety_id/add_management_plan/name'
               exact
               component={ManagementPlanName}
             />
             <Route
-              path="/crop/:variety_id/management_plan/:management_plan_id/tasks"
+              path='/crop/:variety_id/management_plan/:management_plan_id/tasks'
               exact
               component={ManagementTasks}
             />
             <Route
-              path="/crop/:variety_id/management_plan/:management_plan_id/details"
+              path='/crop/:variety_id/management_plan/:management_plan_id/details'
               exact
               component={ManagementDetails}
             />
             <Route
-              path="/crop/:variety_id/management_plan/:management_plan_id/edit"
+              path='/crop/:variety_id/management_plan/:management_plan_id/edit'
               exact
               component={EditManagementDetails}
             />
             <Route
-              path="/crop/:variety_id/:management_plan_id/complete_management_plan"
+              path='/crop/:variety_id/:management_plan_id/complete_management_plan'
               exact
               component={CompleteManagementPlan}
             />
             <Route
-              path="/crop/:variety_id/:management_plan_id/abandon_management_plan"
+              path='/crop/:variety_id/:management_plan_id/abandon_management_plan'
               exact
               component={AbandonManagementPlan}
             />
-            <Route path="/crop_catalogue" exact component={CropCatalogue} />
-            <Route path="/crop_varieties/crop/:crop_id" exact component={CropVarieties} />
-            <Route path="/documents" exact component={Documents} />
-            <Route path="/documents/add_document" exact component={AddDocument} />
-            <Route path="/documents/:document_id/edit_document" exact component={EditDocument} />
-            <Route path="/documents/:document_id" exact component={MainDocument} />
-            <Route path="/tasks" exact component={Tasks} />
-            <Route path="/tasks/:task_id/read_only" exact component={TaskReadOnly} />
-            <Route path="/tasks/:task_id/complete" exact component={TaskComplete} />
-            <Route path="/tasks/:task_id/before_complete" exact component={TaskCompleteStepOne} />
+            <Route path='/crop_catalogue' exact component={CropCatalogue} />
+            <Route path='/crop_varieties/crop/:crop_id' exact component={CropVarieties} />
+            <Route path='/documents' exact component={Documents} />
+            <Route path='/documents/add_document' exact component={AddDocument} />
+            <Route path='/documents/:document_id/edit_document' exact component={EditDocument} />
+            <Route path='/documents/:document_id' exact component={MainDocument} />
+            <Route path='/tasks' exact component={Tasks} />
+            <Route path='/tasks/:task_id/read_only' exact component={TaskReadOnly} />
+            <Route path='/tasks/:task_id/complete' exact component={TaskComplete} />
+            <Route path='/tasks/:task_id/before_complete' exact component={TaskCompleteStepOne} />
             <Route
-              path="/tasks/:task_id/complete_harvest_quantity"
+              path='/tasks/:task_id/complete_harvest_quantity'
               exact
               component={HarvestCompleteQuantity}
             />
-            <Route path="/tasks/:task_id/harvest_uses" exact component={HarvestUses} />
-            <Route path="/tasks/:task_id/abandon" exact component={TaskAbandon} />
-            <Route path="/map" exact component={Map} />
-            <Route path="/map/videos" exact component={MapVideo} />
+            <Route path='/tasks/:task_id/harvest_uses' exact component={HarvestUses} />
+            <Route path='/tasks/:task_id/abandon' exact component={TaskAbandon} />
+            <Route path='/map' exact component={Map} />
+            <Route path='/map/videos' exact component={MapVideo} />
             <Route
-              path="/create_location/farm_site_boundary"
+              path='/create_location/farm_site_boundary'
               exact
               component={PostFarmSiteBoundaryForm}
             />
-            <Route path="/create_location/barn" exact component={PostBarnForm} />
-            <Route path="/create_location/natural_area" exact component={PostNaturalAreaForm} />
-            <Route path="/create_location/surface_water" exact component={PostSurfaceWaterForm} />
-            <Route path="/create_location/residence" exact component={PostResidenceForm} />
-            <Route path="/create_location/ceremonial_area" exact component={PostCeremonialForm} />
-            <Route path="/create_location/garden" exact component={PostGardenForm} />
-            <Route path="/create_location/greenhouse" exact component={PostGreenhouseForm} />
-            <Route path="/create_location/field" exact component={PostFieldForm} />
-            <Route path="/create_location/gate" exact component={PostGateForm} />
-            <Route path="/create_location/water_valve" exact component={PostWaterValveForm} />
-            <Route path="/create_location/fence" exact component={PostFenceForm} />
-            <Route path="/create_location/buffer_zone" exact component={PostBufferZoneForm} />
-            <Route path="/create_location/watercourse" exact component={PostWatercourseForm} />
-            <Route path="/farm_site_boundary/:location_id" component={FarmSiteBoundaryDetails} />
-            <Route path="/barn/:location_id" component={BarnDetails} />
-            <Route path="/natural_area/:location_id" component={NaturalAreaDetails} />
-            <Route path="/surface_water/:location_id" component={SurfaceWaterDetails} />
-            <Route path="/residence/:location_id" component={ResidenceDetails} />
-            <Route path="/ceremonial_area/:location_id" component={CeremonialAreaDetails} />
-            <Route path="/garden/:location_id" component={GardenDetails} />
-            <Route path="/greenhouse/:location_id" component={GreenhouseDetails} />
-            <Route path="/field/:location_id" component={FieldDetails} />
-            <Route path="/gate/:location_id" component={GateDetails} />
-            <Route path="/water_valve/:location_id" component={WaterValveDetails} />
-            <Route path="/fence/:location_id" component={FenceDetails} />
-            <Route path="/buffer_zone/:location_id" component={BufferZoneDetails} />
-            <Route path="/watercourse/:location_id" component={WatercourseDetails} />
-            <Route path="/sensor/:location_id" component={SensorDetails} />
-            <Route path="/sensor/:location_id/edit" exact component={EditSensor} />
-            <Route path="/finances" exact component={Finances} />
-            <Route path="/insights" exact component={Insights} />
-            <Route path="/insights/peoplefed" exact component={PeopleFed} />
-            <Route path="/insights/soilom" exact component={SoilOM} />
-            <Route path="/insights/labourhappiness" exact component={LabourHappiness} />
-            <Route path="/insights/biodiversity" exact component={Biodiversity} />
-            <Route path="/insights/prices" exact component={Prices} />
+            <Route path='/create_location/barn' exact component={PostBarnForm} />
+            <Route path='/create_location/natural_area' exact component={PostNaturalAreaForm} />
+            <Route path='/create_location/surface_water' exact component={PostSurfaceWaterForm} />
+            <Route path='/create_location/residence' exact component={PostResidenceForm} />
+            <Route path='/create_location/ceremonial_area' exact component={PostCeremonialForm} />
+            <Route path='/create_location/garden' exact component={PostGardenForm} />
+            <Route path='/create_location/greenhouse' exact component={PostGreenhouseForm} />
+            <Route path='/create_location/field' exact component={PostFieldForm} />
+            <Route path='/create_location/gate' exact component={PostGateForm} />
+            <Route path='/create_location/water_valve' exact component={PostWaterValveForm} />
+            <Route path='/create_location/fence' exact component={PostFenceForm} />
+            <Route path='/create_location/buffer_zone' exact component={PostBufferZoneForm} />
+            <Route path='/create_location/watercourse' exact component={PostWatercourseForm} />
+            <Route path='/farm_site_boundary/:location_id' component={FarmSiteBoundaryDetails} />
+            <Route path='/barn/:location_id' component={BarnDetails} />
+            <Route path='/natural_area/:location_id' component={NaturalAreaDetails} />
+            <Route path='/surface_water/:location_id' component={SurfaceWaterDetails} />
+            <Route path='/residence/:location_id' component={ResidenceDetails} />
+            <Route path='/ceremonial_area/:location_id' component={CeremonialAreaDetails} />
+            <Route path='/garden/:location_id' component={GardenDetails} />
+            <Route path='/greenhouse/:location_id' component={GreenhouseDetails} />
+            <Route path='/field/:location_id' component={FieldDetails} />
+            <Route path='/gate/:location_id' component={GateDetails} />
+            <Route path='/water_valve/:location_id' component={WaterValveDetails} />
+            <Route path='/fence/:location_id' component={FenceDetails} />
+            <Route path='/buffer_zone/:location_id' component={BufferZoneDetails} />
+            <Route path='/watercourse/:location_id' component={WatercourseDetails} />
+            <Route path='/sensor/:location_id' component={SensorDetails} />
+            <Route path='/sensor/:location_id/edit' exact component={EditSensor} />
+            <Route path='/finances' exact component={Finances} />
+            <Route path='/insights' exact component={Insights} />
+            <Route path='/insights/peoplefed' exact component={PeopleFed} />
+            <Route path='/insights/soilom' exact component={SoilOM} />
+            <Route path='/insights/labourhappiness' exact component={LabourHappiness} />
+            <Route path='/insights/biodiversity' exact component={Biodiversity} />
+            <Route path='/insights/prices' exact component={Prices} />
             {/* <Route path="/insights/waterbalance" exact component={WaterBalance} /> */}
-            <Route path="/insights/erosion" exact component={Erosion} />
+            <Route path='/insights/erosion' exact component={Erosion} />
             {/* <Route path="/insights/nitrogenbalance" exact component={NitrogenBalance} /> */}
-            <Route path="/help" exact component={HelpRequest} />
+            <Route path='/help' exact component={HelpRequest} />
             {/* <Route path="/sales_summary" exact component={SalesSummary} /> */}
-            <Route path="/finances/actual_revenue" exact component={ActualRevenue} />
+            <Route path='/finances/actual_revenue' exact component={ActualRevenue} />
             <Route
-              path="/finances/estimated_revenue/plan/:management_plan_id"
+              path='/finances/estimated_revenue/plan/:management_plan_id'
               exact
               component={UpdateEstimatedCropRevenue}
             />
-            <Route path="/add_sale" exact component={AddSale} />
-            <Route path="/edit_sale" exact component={EditSale} />
-            <Route path="/temp_estimated_revenue" exact component={LegacyEstimatedRevenue} />
-            <Route path="/estimated_revenue" exact component={EstimatedRevenue} />
-            <Route path="/labour" exact component={Labour} />
-            <Route path="/other_expense" exact component={OtherExpense} />
-            <Route path="/expense_detail" exact component={ExpenseDetail} />
-            <Route path="/expense_categories" exact component={ExpenseCategories} />
-            <Route path="/add_expense" exact component={AddExpense} />
-            <Route path="/edit_expense" exact component={TempEditExpense} />
-            <Route path="/sale_detail" exact component={SaleDetail} />
-            <Route path="/farm_selection" exact component={ChooseFarm} />
-            <Route path="/callback" component={Callback} />
-            <Route path="/accept_invitation/sign_up" component={InviteSignUp} />
-            <Route path="/accept_invitation/create_account" component={InvitedUserCreateAccount} />
-            <Route path="/password_reset" component={PasswordResetAccount} />
+            <Route path='/add_sale' exact component={AddSale} />
+            <Route path='/edit_sale' exact component={EditSale} />
+            <Route path='/temp_estimated_revenue' exact component={LegacyEstimatedRevenue} />
+            <Route path='/estimated_revenue' exact component={EstimatedRevenue} />
+            <Route path='/labour' exact component={Labour} />
+            <Route path='/other_expense' exact component={OtherExpense} />
+            <Route path='/expense_detail' exact component={ExpenseDetail} />
+            <Route path='/expense_categories' exact component={ExpenseCategories} />
+            <Route path='/add_expense' exact component={AddExpense} />
+            <Route path='/edit_expense' exact component={TempEditExpense} />
+            <Route path='/sale_detail' exact component={SaleDetail} />
+            <Route path='/farm_selection' exact component={ChooseFarm} />
+            <Route path='/callback' component={Callback} />
+            <Route path='/accept_invitation/sign_up' component={InviteSignUp} />
+            <Route path='/accept_invitation/create_account' component={InvitedUserCreateAccount} />
+            <Route path='/password_reset' component={PasswordResetAccount} />
             <Route path={'/expired'} component={ExpiredTokenScreen} />
-            <Route path="/invite_user" exact component={InviteUser} />
-            <Route path="/certification" exact component={ViewCertification} />
+            <Route path='/invite_user' exact component={InviteUser} />
+            <Route path='/certification' exact component={ViewCertification} />
             <Route
-              path="/certification/report_period"
+              path='/certification/report_period'
               exact
               component={CertificationReportingPeriod}
             />
-            <Route path="/certification/survey" exact component={CertificationSurvey} />
+            <Route path='/certification/survey' exact component={CertificationSurvey} />
             <Route
-              path="/certification/interested_in_organic"
+              path='/certification/interested_in_organic'
               exact
               component={InterestedOrganic}
             />
-            <Route path="/certification/selection" exact component={CertificationSelection} />
+            <Route path='/certification/selection' exact component={CertificationSelection} />
             <Route
-              path="/certification/certifier/selection"
+              path='/certification/certifier/selection'
               exact
               component={CertifierSelectionMenu}
             />
-            <Route path="/certification/certifier/request" exact component={RequestCertifier} />
-            <Route path="/certification/summary" exact component={SetCertificationSummary} />
-            <Route path="/export/:id/from/:from/to/:to" exact component={ExportDownload} />
-            <Route path="/add_task/task_locations" exact component={TaskLocations} />
-            <Route path="/add_task/task_date" exact component={TaskDate} />
-            <Route path="/add_task/task_assignment" exact component={TaskAssignment} />
-            <Route path="/add_task/task_details" exact component={TaskDetails} />
-            <Route path="/add_task/task_type_selection" exact component={TaskTypeSelection} />
-            <Route path="/add_task/task_crops" exact component={TaskCrops} />
-            <Route path="/add_task/manage_custom_tasks" exact component={ManageCustomTasks} />
-            <Route path="/add_task/add_custom_task" exact component={AddCustomTask} />
-            <Route path="/add_task/edit_custom_task" exact component={EditCustomTask} />
+            <Route path='/certification/certifier/request' exact component={RequestCertifier} />
+            <Route path='/certification/summary' exact component={SetCertificationSummary} />
+            <Route path='/export/:id/from/:from/to/:to' exact component={ExportDownload} />
+            <Route path='/add_task/task_locations' exact component={TaskLocations} />
+            <Route path='/add_task/task_date' exact component={TaskDate} />
+            <Route path='/add_task/task_assignment' exact component={TaskAssignment} />
+            <Route path='/add_task/task_details' exact component={TaskDetails} />
+            <Route path='/add_task/task_type_selection' exact component={TaskTypeSelection} />
+            <Route path='/add_task/task_crops' exact component={TaskCrops} />
+            <Route path='/add_task/manage_custom_tasks' exact component={ManageCustomTasks} />
+            <Route path='/add_task/add_custom_task' exact component={AddCustomTask} />
+            <Route path='/add_task/edit_custom_task' exact component={EditCustomTask} />
             <Route
-              path="/add_task/edit_custom_task_update"
+              path='/add_task/edit_custom_task_update'
               exact
               component={EditCustomTaskUpdate}
             />
-            <Route path="/add_task/planting_method" exact component={TaskTransplantMethod} />
-            <Route path="/add_task/bed_method" exact component={TaskBedMethod} />
-            <Route path="/add_task/bed_guidance" exact component={TaskBedGuidance} />
-            <Route path="/add_task/container_method" exact component={TaskContainerMethod} />
-            <Route path="/add_task/row_method" exact component={TaskRowMethod} />
-            <Route path="/add_task/row_guidance" exact component={TaskRowGuidance} />
-            <Route path="/notifications" exact component={Notification} />
+            <Route path='/add_task/planting_method' exact component={TaskTransplantMethod} />
+            <Route path='/add_task/bed_method' exact component={TaskBedMethod} />
+            <Route path='/add_task/bed_guidance' exact component={TaskBedGuidance} />
+            <Route path='/add_task/container_method' exact component={TaskContainerMethod} />
+            <Route path='/add_task/row_method' exact component={TaskRowMethod} />
+            <Route path='/add_task/row_guidance' exact component={TaskRowGuidance} />
+            <Route path='/notifications' exact component={Notification} />
             <Route
-              path="/notifications/:notification_id/read_only"
+              path='/notifications/:notification_id/read_only'
               exact
               component={NotificationReadOnly}
             />
-            <Route path="/403" exact component={Forbidden} />
-            <Route path="/unknown_record" exact component={UnknownRecord} />
+            <Route path='/403' exact component={Forbidden} />
+            <Route path='/unknown_record' exact component={UnknownRecord} />
             <Redirect
               to={'/'}
               //TODO change to 404
@@ -648,299 +652,299 @@ const Routes = () => {
           </Switch>
         </Suspense>
       );
-    } else if (role_id === 2 || role_id === 5) {
+    } else if(role_id === 2 || role_id === 5) {
       return (
         <Suspense fallback={<Spinner />}>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/home" exact component={Home} />
-            <Route path="/profile" exact component={Account} />
-            <Route path="/people" exact component={People} />
-            <Route path="/user/:user_id" exact component={EditUser} />
-
-            <Route path="/farm" exact component={Farm} />
-            <Route path="/consent" exact component={ConsentForm} />
-            <Route path="/help" exact component={HelpRequest} />
-            <Route path="/crop/new" exact component={AddNewCrop} />
-            <Route path="/tasks" exact component={Tasks} />
-            <Route path="/tasks/:task_id/read_only" exact component={TaskReadOnly} />
+            <Route path='/' exact component={Home} />
+            <Route path='/home' exact component={Home} />
+            <Route path='/profile' exact component={Account} />
+            <Route path='/people' exact component={People} />
+            <Route path='/user/:user_id' exact component={EditUser} />
+            
+            <Route path='/farm' exact component={Farm} />
+            <Route path='/consent' exact component={ConsentForm} />
+            <Route path='/help' exact component={HelpRequest} />
+            <Route path='/crop/new' exact component={AddNewCrop} />
+            <Route path='/tasks' exact component={Tasks} />
+            <Route path='/tasks/:task_id/read_only' exact component={TaskReadOnly} />
             <Route
-              path="/crop/:crop_id/add_crop_variety/compliance"
+              path='/crop/:crop_id/add_crop_variety/compliance'
               exact
               component={ComplianceInfo}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/planted_already"
+              path='/crop/:variety_id/add_management_plan/planted_already'
               exact
               component={PlantedAlready}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/needs_transplant"
+              path='/crop/:variety_id/add_management_plan/needs_transplant'
               exact
               component={Transplant}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/plant_date"
+              path='/crop/:variety_id/add_management_plan/plant_date'
               exact
               component={PlantingDate}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/choose_initial_planting_location"
+              path='/crop/:variety_id/add_management_plan/choose_initial_planting_location'
               exact
               component={PlantingLocation}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/choose_final_planting_location"
+              path='/crop/:variety_id/add_management_plan/choose_final_planting_location'
               exact
               component={PlantingLocation}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/final_planting_method"
+              path='/crop/:variety_id/add_management_plan/final_planting_method'
               exact
               component={PlantingMethod}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_planting_method"
+              path='/crop/:variety_id/add_management_plan/initial_planting_method'
               exact
               component={PlantingMethod}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_broadcast_method"
+              path='/crop/:variety_id/add_management_plan/initial_broadcast_method'
               exact
               component={PlantBroadcast}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_container_method"
+              path='/crop/:variety_id/add_management_plan/initial_container_method'
               exact
               component={PlantInContainer}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_bed_method"
+              path='/crop/:variety_id/add_management_plan/initial_bed_method'
               exact
               component={BedPlan}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_bed_guidance"
+              path='/crop/:variety_id/add_management_plan/initial_bed_guidance'
               exact
               component={BedPlanGuidance}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_row_method"
+              path='/crop/:variety_id/add_management_plan/initial_row_method'
               exact
               component={RowMethod}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/initial_row_guidance"
+              path='/crop/:variety_id/add_management_plan/initial_row_guidance'
               exact
               component={RowMethodGuidance}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/broadcast_method"
+              path='/crop/:variety_id/add_management_plan/broadcast_method'
               exact
               component={PlantBroadcast}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/container_method"
+              path='/crop/:variety_id/add_management_plan/container_method'
               exact
               component={PlantInContainer}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/bed_method"
+              path='/crop/:variety_id/add_management_plan/bed_method'
               exact
               component={BedPlan}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/bed_guidance"
+              path='/crop/:variety_id/add_management_plan/bed_guidance'
               exact
               component={BedPlanGuidance}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/row_method"
+              path='/crop/:variety_id/add_management_plan/row_method'
               exact
               component={RowMethod}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/row_guidance"
+              path='/crop/:variety_id/add_management_plan/row_guidance'
               exact
               component={RowMethodGuidance}
             />
             <Route
-              path="/crop/:variety_id/add_management_plan/name"
+              path='/crop/:variety_id/add_management_plan/name'
               exact
               component={ManagementPlanName}
             />
             <Route
-              path="/crop/:variety_id/management_plan/:management_plan_id/tasks"
+              path='/crop/:variety_id/management_plan/:management_plan_id/tasks'
               exact
               component={ManagementTasks}
             />
             <Route
-              path="/crop/:variety_id/management_plan/:management_plan_id/details"
+              path='/crop/:variety_id/management_plan/:management_plan_id/details'
               exact
               component={ManagementDetails}
             />
             <Route
-              path="/crop/:variety_id/management_plan/:management_plan_id/edit"
+              path='/crop/:variety_id/management_plan/:management_plan_id/edit'
               exact
               component={EditManagementDetails}
             />
             <Route
-              path="/crop/:variety_id/:management_plan_id/complete_management_plan"
+              path='/crop/:variety_id/:management_plan_id/complete_management_plan'
               exact
               component={CompleteManagementPlan}
             />
             <Route
-              path="/crop/:variety_id/:management_plan_id/abandon_management_plan"
+              path='/crop/:variety_id/:management_plan_id/abandon_management_plan'
               exact
               component={AbandonManagementPlan}
             />
-            <Route path="/crop_catalogue" exact component={CropCatalogue} />
-            <Route path="/crop_varieties/crop/:crop_id" exact component={CropVarieties} />
-            <Route path="/crop/:variety_id/detail" component={CropDetail} />
-            <Route path="/crop/:variety_id/management" component={CropManagement} />
-            <Route path="/crop/:variety_id/edit_crop_variety" exact component={EditCrop} />
-            <Route path="/documents" exact component={Documents} />
-            <Route path="/documents/add_document" exact component={AddDocument} />
-            <Route path="/documents/:document_id/edit_document" exact component={EditDocument} />
-            <Route path="/documents/:document_id" exact component={MainDocument} />
-            <Route path="/map" exact component={Map} />
-            <Route path="/map/videos" exact component={MapVideo} />
+            <Route path='/crop_catalogue' exact component={CropCatalogue} />
+            <Route path='/crop_varieties/crop/:crop_id' exact component={CropVarieties} />
+            <Route path='/crop/:variety_id/detail' component={CropDetail} />
+            <Route path='/crop/:variety_id/management' component={CropManagement} />
+            <Route path='/crop/:variety_id/edit_crop_variety' exact component={EditCrop} />
+            <Route path='/documents' exact component={Documents} />
+            <Route path='/documents/add_document' exact component={AddDocument} />
+            <Route path='/documents/:document_id/edit_document' exact component={EditDocument} />
+            <Route path='/documents/:document_id' exact component={MainDocument} />
+            <Route path='/map' exact component={Map} />
+            <Route path='/map/videos' exact component={MapVideo} />
             <Route
-              path="/create_location/farm_site_boundary"
+              path='/create_location/farm_site_boundary'
               exact
               component={PostFarmSiteBoundaryForm}
             />
-            <Route path="/create_location/barn" exact component={PostBarnForm} />
-            <Route path="/create_location/natural_area" exact component={PostNaturalAreaForm} />
-            <Route path="/create_location/surface_water" exact component={PostSurfaceWaterForm} />
-            <Route path="/create_location/residence" exact component={PostResidenceForm} />
-            <Route path="/create_location/ceremonial_area" exact component={PostCeremonialForm} />
-            <Route path="/create_location/garden" exact component={PostGardenForm} />
-            <Route path="/create_location/greenhouse" exact component={PostGreenhouseForm} />
-            <Route path="/create_location/field" exact component={PostFieldForm} />
-            <Route path="/create_location/gate" exact component={PostGateForm} />
-            <Route path="/create_location/water_valve" exact component={PostWaterValveForm} />
-            <Route path="/create_location/fence" exact component={PostFenceForm} />
-            <Route path="/create_location/buffer_zone" exact component={PostBufferZoneForm} />
-            <Route path="/create_location/watercourse" exact component={PostWatercourseForm} />
-            <Route path="/farm_site_boundary/:location_id" component={FarmSiteBoundaryDetails} />
-            <Route path="/barn/:location_id" component={BarnDetails} />
-            <Route path="/natural_area/:location_id" component={NaturalAreaDetails} />
-            <Route path="/surface_water/:location_id" component={SurfaceWaterDetails} />
-            <Route path="/residence/:location_id" component={ResidenceDetails} />
-            <Route path="/ceremonial_area/:location_id" component={CeremonialAreaDetails} />
-            <Route path="/garden/:location_id" component={GardenDetails} />
-            <Route path="/greenhouse/:location_id" component={GreenhouseDetails} />
-            <Route path="/field/:location_id" component={FieldDetails} />
-            <Route path="/gate/:location_id" component={GateDetails} />
-            <Route path="/water_valve/:location_id" component={WaterValveDetails} />
-            <Route path="/fence/:location_id" component={FenceDetails} />
-            <Route path="/buffer_zone/:location_id" component={BufferZoneDetails} />
-            <Route path="/watercourse/:location_id" component={WatercourseDetails} />
-            <Route path="/sensor/:location_id" component={SensorDetails} />
-
-            <Route path="/finances" exact component={Finances} />
+            <Route path='/create_location/barn' exact component={PostBarnForm} />
+            <Route path='/create_location/natural_area' exact component={PostNaturalAreaForm} />
+            <Route path='/create_location/surface_water' exact component={PostSurfaceWaterForm} />
+            <Route path='/create_location/residence' exact component={PostResidenceForm} />
+            <Route path='/create_location/ceremonial_area' exact component={PostCeremonialForm} />
+            <Route path='/create_location/garden' exact component={PostGardenForm} />
+            <Route path='/create_location/greenhouse' exact component={PostGreenhouseForm} />
+            <Route path='/create_location/field' exact component={PostFieldForm} />
+            <Route path='/create_location/gate' exact component={PostGateForm} />
+            <Route path='/create_location/water_valve' exact component={PostWaterValveForm} />
+            <Route path='/create_location/fence' exact component={PostFenceForm} />
+            <Route path='/create_location/buffer_zone' exact component={PostBufferZoneForm} />
+            <Route path='/create_location/watercourse' exact component={PostWatercourseForm} />
+            <Route path='/farm_site_boundary/:location_id' component={FarmSiteBoundaryDetails} />
+            <Route path='/barn/:location_id' component={BarnDetails} />
+            <Route path='/natural_area/:location_id' component={NaturalAreaDetails} />
+            <Route path='/surface_water/:location_id' component={SurfaceWaterDetails} />
+            <Route path='/residence/:location_id' component={ResidenceDetails} />
+            <Route path='/ceremonial_area/:location_id' component={CeremonialAreaDetails} />
+            <Route path='/garden/:location_id' component={GardenDetails} />
+            <Route path='/greenhouse/:location_id' component={GreenhouseDetails} />
+            <Route path='/field/:location_id' component={FieldDetails} />
+            <Route path='/gate/:location_id' component={GateDetails} />
+            <Route path='/water_valve/:location_id' component={WaterValveDetails} />
+            <Route path='/fence/:location_id' component={FenceDetails} />
+            <Route path='/buffer_zone/:location_id' component={BufferZoneDetails} />
+            <Route path='/watercourse/:location_id' component={WatercourseDetails} />
+            <Route path='/sensor/:location_id' component={SensorDetails} />
+            
+            <Route path='/finances' exact component={Finances} />
             {/* <Route path="/sales_summary" exact component={SalesSummary} /> */}
-            <Route path="/finances/actual_revenue" exact component={ActualRevenue} />
+            <Route path='/finances/actual_revenue' exact component={ActualRevenue} />
             <Route
-              path="/finances/estimated_revenue/plan/:management_plan_id"
+              path='/finances/estimated_revenue/plan/:management_plan_id'
               exact
               component={UpdateEstimatedCropRevenue}
             />
-            <Route path="/add_sale" exact component={AddSale} />
-            <Route path="/edit_sale" exact component={EditSale} />
-            <Route path="/temp_estimated_revenue" exact component={LegacyEstimatedRevenue} />
-            <Route path="/estimated_revenue" exact component={EstimatedRevenue} />
-            <Route path="/labour" exact component={Labour} />
-            <Route path="/other_expense" exact component={OtherExpense} />
-            <Route path="/expense_detail" exact component={ExpenseDetail} />
-            <Route path="/expense_categories" exact component={ExpenseCategories} />
-            <Route path="/add_expense" exact component={AddExpense} />
-            <Route path="/crop/new" exact component={AddNewCrop} />
-            <Route path="/crop/:crop_id/add_crop_variety" exact component={AddCrop} />
+            <Route path='/add_sale' exact component={AddSale} />
+            <Route path='/edit_sale' exact component={EditSale} />
+            <Route path='/temp_estimated_revenue' exact component={LegacyEstimatedRevenue} />
+            <Route path='/estimated_revenue' exact component={EstimatedRevenue} />
+            <Route path='/labour' exact component={Labour} />
+            <Route path='/other_expense' exact component={OtherExpense} />
+            <Route path='/expense_detail' exact component={ExpenseDetail} />
+            <Route path='/expense_categories' exact component={ExpenseCategories} />
+            <Route path='/add_expense' exact component={AddExpense} />
+            <Route path='/crop/new' exact component={AddNewCrop} />
+            <Route path='/crop/:crop_id/add_crop_variety' exact component={AddCrop} />
             <Route
-              path="/crop/:crop_id/add_crop_variety/compliance"
+              path='/crop/:crop_id/add_crop_variety/compliance'
               exact
               component={ComplianceInfo}
             />
-
-            <Route path="/edit_expense" exact component={TempEditExpense} />
-            <Route path="/sale_detail" exact component={SaleDetail} />
-            <Route path="/farm_selection" exact component={ChooseFarm} />
-            <Route path="/insights" exact component={Insights} />
-            <Route path="/insights/peoplefed" exact component={PeopleFed} />
-            <Route path="/insights/soilom" exact component={SoilOM} />
-            <Route path="/insights/labourhappiness" exact component={LabourHappiness} />
-            <Route path="/insights/biodiversity" exact component={Biodiversity} />
-            <Route path="/insights/prices" exact component={Prices} />
+            
+            <Route path='/edit_expense' exact component={TempEditExpense} />
+            <Route path='/sale_detail' exact component={SaleDetail} />
+            <Route path='/farm_selection' exact component={ChooseFarm} />
+            <Route path='/insights' exact component={Insights} />
+            <Route path='/insights/peoplefed' exact component={PeopleFed} />
+            <Route path='/insights/soilom' exact component={SoilOM} />
+            <Route path='/insights/labourhappiness' exact component={LabourHappiness} />
+            <Route path='/insights/biodiversity' exact component={Biodiversity} />
+            <Route path='/insights/prices' exact component={Prices} />
             {/* <Route path="/insights/waterbalance" exact component={WaterBalance} /> */}
-            <Route path="/insights/erosion" exact component={Erosion} />
+            <Route path='/insights/erosion' exact component={Erosion} />
             {/* <Route path="/insights/nitrogenbalance" exact component={NitrogenBalance} /> */}
-            <Route path="/farm_selection" exact component={ChooseFarm} />
-            <Route path="/callback" component={Callback} />
-            <Route path="/accept_invitation/sign_up" component={InviteSignUp} />
-            <Route path="/accept_invitation/create_account" component={InvitedUserCreateAccount} />
-            <Route path="/password_reset" component={PasswordResetAccount} />
+            <Route path='/farm_selection' exact component={ChooseFarm} />
+            <Route path='/callback' component={Callback} />
+            <Route path='/accept_invitation/sign_up' component={InviteSignUp} />
+            <Route path='/accept_invitation/create_account' component={InvitedUserCreateAccount} />
+            <Route path='/password_reset' component={PasswordResetAccount} />
             <Route path={'/expired'} component={ExpiredTokenScreen} />
-            <Route path="/invite_user" exact component={InviteUser} />
-            <Route path="/certification" exact component={ViewCertification} />
+            <Route path='/invite_user' exact component={InviteUser} />
+            <Route path='/certification' exact component={ViewCertification} />
             <Route
-              path="/certification/report_period"
+              path='/certification/report_period'
               exact
               component={CertificationReportingPeriod}
             />
-            <Route path="/certification/survey" exact component={CertificationSurvey} />
+            <Route path='/certification/survey' exact component={CertificationSurvey} />
             <Route
-              path="/certification/interested_in_organic"
+              path='/certification/interested_in_organic'
               exact
               component={InterestedOrganic}
             />
-            <Route path="/certification/selection" exact component={CertificationSelection} />
+            <Route path='/certification/selection' exact component={CertificationSelection} />
             <Route
-              path="/certification/certifier/selection"
+              path='/certification/certifier/selection'
               exact
               component={CertifierSelectionMenu}
             />
-            <Route path="/certification/certifier/request" exact component={RequestCertifier} />
-            <Route path="/certification/summary" exact component={SetCertificationSummary} />
-            <Route path="/export/:id/from/:from/to/:to" exact component={ExportDownload} />
-            <Route path="/tasks/:task_id/abandon" exact component={TaskAbandon} />
-            <Route path="/tasks/:task_id/complete" exact component={TaskComplete} />
-            <Route path="/tasks/:task_id/before_complete" exact component={TaskCompleteStepOne} />
+            <Route path='/certification/certifier/request' exact component={RequestCertifier} />
+            <Route path='/certification/summary' exact component={SetCertificationSummary} />
+            <Route path='/export/:id/from/:from/to/:to' exact component={ExportDownload} />
+            <Route path='/tasks/:task_id/abandon' exact component={TaskAbandon} />
+            <Route path='/tasks/:task_id/complete' exact component={TaskComplete} />
+            <Route path='/tasks/:task_id/before_complete' exact component={TaskCompleteStepOne} />
             <Route
-              path="/tasks/:task_id/complete_harvest_quantity"
+              path='/tasks/:task_id/complete_harvest_quantity'
               exact
               component={HarvestCompleteQuantity}
             />
-            <Route path="/tasks/:task_id/harvest_uses" exact component={HarvestUses} />
-            <Route path="/add_task/task_locations" exact component={TaskLocations} />
-            <Route path="/add_task/task_date" exact component={TaskDate} />
-            <Route path="/add_task/task_assignment" exact component={TaskAssignment} />
-            <Route path="/add_task/task_details" exact component={TaskDetails} />
-            <Route path="/add_task/task_type_selection" exact component={TaskTypeSelection} />
-            <Route path="/add_task/task_crops" exact component={TaskCrops} />
-            <Route path="/add_task/manage_custom_tasks" exact component={ManageCustomTasks} />
-            <Route path="/add_task/add_custom_task" exact component={AddCustomTask} />
-            <Route path="/add_task/edit_custom_task" exact component={EditCustomTask} />
+            <Route path='/tasks/:task_id/harvest_uses' exact component={HarvestUses} />
+            <Route path='/add_task/task_locations' exact component={TaskLocations} />
+            <Route path='/add_task/task_date' exact component={TaskDate} />
+            <Route path='/add_task/task_assignment' exact component={TaskAssignment} />
+            <Route path='/add_task/task_details' exact component={TaskDetails} />
+            <Route path='/add_task/task_type_selection' exact component={TaskTypeSelection} />
+            <Route path='/add_task/task_crops' exact component={TaskCrops} />
+            <Route path='/add_task/manage_custom_tasks' exact component={ManageCustomTasks} />
+            <Route path='/add_task/add_custom_task' exact component={AddCustomTask} />
+            <Route path='/add_task/edit_custom_task' exact component={EditCustomTask} />
             <Route
-              path="/add_task/edit_custom_task_update"
+              path='/add_task/edit_custom_task_update'
               exact
               component={EditCustomTaskUpdate}
             />
-            <Route path="/add_task/planting_method" exact component={TaskTransplantMethod} />
-            <Route path="/add_task/bed_method" exact component={TaskBedMethod} />
-            <Route path="/add_task/bed_guidance" exact component={TaskBedGuidance} />
-            <Route path="/add_task/container_method" exact component={TaskContainerMethod} />
-            <Route path="/add_task/row_method" exact component={TaskRowMethod} />
-            <Route path="/add_task/row_guidance" exact component={TaskRowGuidance} />
-            <Route path="/notifications" exact component={Notification} />
+            <Route path='/add_task/planting_method' exact component={TaskTransplantMethod} />
+            <Route path='/add_task/bed_method' exact component={TaskBedMethod} />
+            <Route path='/add_task/bed_guidance' exact component={TaskBedGuidance} />
+            <Route path='/add_task/container_method' exact component={TaskContainerMethod} />
+            <Route path='/add_task/row_method' exact component={TaskRowMethod} />
+            <Route path='/add_task/row_guidance' exact component={TaskRowGuidance} />
+            <Route path='/notifications' exact component={Notification} />
             <Route
-              path="/notifications/:notification_id/read_only"
+              path='/notifications/:notification_id/read_only'
               exact
               component={NotificationReadOnly}
             />
-            <Route path="/403" exact component={Forbidden} />
-            <Route path="/unknown_record" exact component={UnknownRecord} />
+            <Route path='/403' exact component={Forbidden} />
+            <Route path='/unknown_record' exact component={UnknownRecord} />
             <Redirect to={'/'} />
           </Switch>
         </Suspense>
@@ -949,114 +953,114 @@ const Routes = () => {
       return (
         <Suspense fallback={<Spinner />}>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/home" exact component={Home} />
-            <Route path="/profile" exact component={Account} />
-            <Route path="/people" exact component={People} />
-            <Route path="/farm" exact component={Farm} />
-            <Route path="/consent" exact component={ConsentForm} />
-            <Route path="/crop_catalogue" exact component={CropCatalogue} />
-            <Route path="/crop_varieties/crop/:crop_id" exact component={CropVarieties} />
-            <Route path="/crop/:variety_id/detail" exact component={CropDetail} />
-            <Route path="/crop/:variety_id/management" exact component={CropManagement} />
+            <Route path='/' exact component={Home} />
+            <Route path='/home' exact component={Home} />
+            <Route path='/profile' exact component={Account} />
+            <Route path='/people' exact component={People} />
+            <Route path='/farm' exact component={Farm} />
+            <Route path='/consent' exact component={ConsentForm} />
+            <Route path='/crop_catalogue' exact component={CropCatalogue} />
+            <Route path='/crop_varieties/crop/:crop_id' exact component={CropVarieties} />
+            <Route path='/crop/:variety_id/detail' exact component={CropDetail} />
+            <Route path='/crop/:variety_id/management' exact component={CropManagement} />
             <Route
-              path="/crop/:variety_id/management_plan/:management_plan_id/tasks"
+              path='/crop/:variety_id/management_plan/:management_plan_id/tasks'
               exact
               component={ManagementTasks}
             />
             <Route
-              path="/crop/:variety_id/management_plan/:management_plan_id/details"
+              path='/crop/:variety_id/management_plan/:management_plan_id/details'
               exact
               component={ManagementDetails}
             />
-            <Route path="/map" exact component={Map} />
-            <Route path="/farm_site_boundary/:location_id" component={FarmSiteBoundaryDetails} />
-            <Route path="/barn/:location_id" component={BarnDetails} />
-            <Route path="/natural_area/:location_id" component={NaturalAreaDetails} />
-            <Route path="/surface_water/:location_id" component={SurfaceWaterDetails} />
-            <Route path="/residence/:location_id" component={ResidenceDetails} />
-            <Route path="/ceremonial_area/:location_id" component={CeremonialAreaDetails} />
-            <Route path="/garden/:location_id" component={GardenDetails} />
-            <Route path="/greenhouse/:location_id" component={GreenhouseDetails} />
-            <Route path="/field/:location_id" component={FieldDetails} />
-            <Route path="/gate/:location_id" component={GateDetails} />
-            <Route path="/water_valve/:location_id" component={WaterValveDetails} />
-            <Route path="/fence/:location_id" component={FenceDetails} />
-            <Route path="/buffer_zone/:location_id" component={BufferZoneDetails} />
-            <Route path="/watercourse/:location_id" component={WatercourseDetails} />
-            <Route path="/sensor/:location_id" component={SensorDetails} />
-
-            <Route path="/farm_selection" exact component={ChooseFarm} />
-            <Route path="/insights" exact component={Insights} />
-            <Route path="/insights/peoplefed" exact component={PeopleFed} />
-            <Route path="/insights/soilom" exact component={SoilOM} />
-            <Route path="/insights/labourhappiness" exact component={LabourHappiness} />
-            <Route path="/insights/biodiversity" exact component={Biodiversity} />
-            <Route path="/insights/prices" exact component={Prices} />
+            <Route path='/map' exact component={Map} />
+            <Route path='/farm_site_boundary/:location_id' component={FarmSiteBoundaryDetails} />
+            <Route path='/barn/:location_id' component={BarnDetails} />
+            <Route path='/natural_area/:location_id' component={NaturalAreaDetails} />
+            <Route path='/surface_water/:location_id' component={SurfaceWaterDetails} />
+            <Route path='/residence/:location_id' component={ResidenceDetails} />
+            <Route path='/ceremonial_area/:location_id' component={CeremonialAreaDetails} />
+            <Route path='/garden/:location_id' component={GardenDetails} />
+            <Route path='/greenhouse/:location_id' component={GreenhouseDetails} />
+            <Route path='/field/:location_id' component={FieldDetails} />
+            <Route path='/gate/:location_id' component={GateDetails} />
+            <Route path='/water_valve/:location_id' component={WaterValveDetails} />
+            <Route path='/fence/:location_id' component={FenceDetails} />
+            <Route path='/buffer_zone/:location_id' component={BufferZoneDetails} />
+            <Route path='/watercourse/:location_id' component={WatercourseDetails} />
+            <Route path='/sensor/:location_id' component={SensorDetails} />
+            
+            <Route path='/farm_selection' exact component={ChooseFarm} />
+            <Route path='/insights' exact component={Insights} />
+            <Route path='/insights/peoplefed' exact component={PeopleFed} />
+            <Route path='/insights/soilom' exact component={SoilOM} />
+            <Route path='/insights/labourhappiness' exact component={LabourHappiness} />
+            <Route path='/insights/biodiversity' exact component={Biodiversity} />
+            <Route path='/insights/prices' exact component={Prices} />
             {/* <Route path="/insights/waterbalance" exact component={WaterBalance} /> */}
-            <Route path="/insights/erosion" exact component={Erosion} />
+            <Route path='/insights/erosion' exact component={Erosion} />
             {/* <Route path="/insights/nitrogenbalance" exact component={NitrogenBalance} /> */}
-            <Route path="/callback" component={Callback} />
-            <Route path="/accept_invitation/sign_up" component={InviteSignUp} />
-            <Route path="/accept_invitation/create_account" component={InvitedUserCreateAccount} />
-            <Route path="/password_reset" component={PasswordResetAccount} />
+            <Route path='/callback' component={Callback} />
+            <Route path='/accept_invitation/sign_up' component={InviteSignUp} />
+            <Route path='/accept_invitation/create_account' component={InvitedUserCreateAccount} />
+            <Route path='/password_reset' component={PasswordResetAccount} />
             <Route path={'/expired'} component={ExpiredTokenScreen} />
-            <Route path="/help" exact component={HelpRequest} />
-            <Route path="/tasks" exact component={Tasks} />
-            <Route path="/tasks/:task_id/read_only" exact component={TaskReadOnly} />
-            <Route path="/tasks/:task_id/abandon" exact component={TaskAbandon} />
-            <Route path="/tasks/:task_id/complete" exact component={TaskComplete} />
-            <Route path="/tasks/:task_id/before_complete" exact component={TaskCompleteStepOne} />
+            <Route path='/help' exact component={HelpRequest} />
+            <Route path='/tasks' exact component={Tasks} />
+            <Route path='/tasks/:task_id/read_only' exact component={TaskReadOnly} />
+            <Route path='/tasks/:task_id/abandon' exact component={TaskAbandon} />
+            <Route path='/tasks/:task_id/complete' exact component={TaskComplete} />
+            <Route path='/tasks/:task_id/before_complete' exact component={TaskCompleteStepOne} />
             <Route
-              path="/tasks/:task_id/complete_harvest_quantity"
+              path='/tasks/:task_id/complete_harvest_quantity'
               exact
               component={HarvestCompleteQuantity}
             />
-            <Route path="/tasks/:task_id/harvest_uses" exact component={HarvestUses} />
-            <Route path="/add_task/task_locations" exact component={TaskLocations} />
-            <Route path="/add_task/task_date" exact component={TaskDate} />
-            <Route path="/add_task/task_assignment" exact component={TaskAssignment} />
-            <Route path="/add_task/task_details" exact component={TaskDetails} />
-            <Route path="/add_task/task_type_selection" exact component={TaskTypeSelection} />
-            <Route path="/add_task/task_crops" exact component={TaskCrops} />
-            <Route path="/add_task/manage_custom_tasks" exact component={ManageCustomTasks} />
-            <Route path="/add_task/add_custom_task" exact component={AddCustomTask} />
-            <Route path="/add_task/edit_custom_task" exact component={EditCustomTask} />
+            <Route path='/tasks/:task_id/harvest_uses' exact component={HarvestUses} />
+            <Route path='/add_task/task_locations' exact component={TaskLocations} />
+            <Route path='/add_task/task_date' exact component={TaskDate} />
+            <Route path='/add_task/task_assignment' exact component={TaskAssignment} />
+            <Route path='/add_task/task_details' exact component={TaskDetails} />
+            <Route path='/add_task/task_type_selection' exact component={TaskTypeSelection} />
+            <Route path='/add_task/task_crops' exact component={TaskCrops} />
+            <Route path='/add_task/manage_custom_tasks' exact component={ManageCustomTasks} />
+            <Route path='/add_task/add_custom_task' exact component={AddCustomTask} />
+            <Route path='/add_task/edit_custom_task' exact component={EditCustomTask} />
             <Route
-              path="/add_task/edit_custom_task_update"
+              path='/add_task/edit_custom_task_update'
               exact
               component={EditCustomTaskUpdate}
             />
-            <Route path="/add_task/planting_method" exact component={TaskTransplantMethod} />
-            <Route path="/add_task/bed_method" exact component={TaskBedMethod} />
-            <Route path="/add_task/bed_guidance" exact component={TaskBedGuidance} />
-            <Route path="/add_task/container_method" exact component={TaskContainerMethod} />
-            <Route path="/add_task/row_method" exact component={TaskRowMethod} />
-            <Route path="/add_task/row_guidance" exact component={TaskRowGuidance} />
-            <Route path="/notifications" exact component={Notification} />
+            <Route path='/add_task/planting_method' exact component={TaskTransplantMethod} />
+            <Route path='/add_task/bed_method' exact component={TaskBedMethod} />
+            <Route path='/add_task/bed_guidance' exact component={TaskBedGuidance} />
+            <Route path='/add_task/container_method' exact component={TaskContainerMethod} />
+            <Route path='/add_task/row_method' exact component={TaskRowMethod} />
+            <Route path='/add_task/row_guidance' exact component={TaskRowGuidance} />
+            <Route path='/notifications' exact component={Notification} />
             <Route
-              path="/notifications/:notification_id/read_only"
+              path='/notifications/:notification_id/read_only'
               exact
               component={NotificationReadOnly}
             />
-            <Route path="/403" exact component={Forbidden} />
-            <Route path="/unknown_record" exact component={UnknownRecord} />
+            <Route path='/403' exact component={Forbidden} />
+            <Route path='/unknown_record' exact component={UnknownRecord} />
             <Redirect to={'/'} />
           </Switch>
         </Suspense>
       );
     }
-  } else if (!isAuthenticated()) {
+  } else if(!isAuthenticated()) {
     return (
       <Suspense fallback={<Spinner />}>
         <Switch>
           <Route path={'/render_survey'} exact component={RenderSurvey} />
-          <Route path="/callback" component={Callback} />
-          <Route path="/accept_invitation/sign_up" component={InviteSignUp} />
-          <Route path="/accept_invitation/create_account" component={InvitedUserCreateAccount} />
-          <Route path="/password_reset" component={PasswordResetAccount} />
+          <Route path='/callback' component={Callback} />
+          <Route path='/accept_invitation/sign_up' component={InviteSignUp} />
+          <Route path='/accept_invitation/create_account' component={InvitedUserCreateAccount} />
+          <Route path='/password_reset' component={PasswordResetAccount} />
           <Route path={'/expired'} component={ExpiredTokenScreen} />
-          <Route path="/" exact component={CustomSignUp} />
+          <Route path='/' exact component={CustomSignUp} />
           <Redirect
             to={'/'}
             //TODO change to 404

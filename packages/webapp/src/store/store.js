@@ -8,6 +8,7 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['storeReducer'],
   stateReconciler: autoMergeLevel2,
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,4 +29,4 @@ export const store = configureStore({
 export const purgeState = () => {
   persistor.purge();
 };
-export const persistor = persistStore(store);
+export const persistor = persistStore(store, { blacklist: ['tempStateReducer'] });

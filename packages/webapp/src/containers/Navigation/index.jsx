@@ -33,7 +33,7 @@ const NavBar = (props) => {
   const resetSpotlight = () => {
     dispatch(setSpotlightToShown(['notification', 'navigation']));
   };
-
+  
   return isFarmSelected ? (
     <Suspense fallback={<NoFarmNavBar />}>
       <PureNavBar
@@ -45,9 +45,19 @@ const NavBar = (props) => {
         showFinances={isAdmin}
       />
     </Suspense>
-  ) : (
-    <NoFarmNavBar history={history} />
-  );
+  ) : (isAuthenticated() ? (
+    <Suspense fallback={<NoFarmNavBar />}>
+      <PureNavBar
+        showFarm={false}
+        showTasks={false}
+        intro={true}
+        showSpotLight={!navigation}
+        showNotification={navigation && !notification}
+        resetSpotlight={resetSpotlight}
+        history={history}
+      />
+    </Suspense>
+  ) : <NoFarmNavBar />);
 };
 
 const mapStateToProps = (state) => {
