@@ -15,9 +15,11 @@
 
 import express from 'express';
 const router = express.Router();
-import hasFarmAccess from '../middleware/acl/hasFarmAccess.js';
+import hasFarmAccess from '../middleware/acl/hasFarmAccess.js'
 import storeController from '../controllers/storeController.js'
 import checkScope from '../middleware/acl/checkScope.js'
+import multerDiskUpload from '../util/fileUpload.js'
+import validateFileExtension from '../middleware/validation/uploadImage.js'
 
 
 router.get(
@@ -73,6 +75,14 @@ router.post(
   hasFarmAccess({ params: 'farm_id' }),
   checkScope(['manage:store']),
   storeController.addStoreDetails(),
+);
+router.post(
+  '/upload/farm/:farm_id',
+  hasFarmAccess({ params: 'farm_id' }),
+  checkScope(['manage:store']),
+  multerDiskUpload,
+  validateFileExtension,
+  storeController.uploadStoreImage(),
 );
 
 

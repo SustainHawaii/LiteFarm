@@ -7,21 +7,21 @@ import { VscLocation } from 'react-icons/vsc';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   userFarmReducerSelector,
-} from '../../userFarmSlice';
+} from '../../../userFarmSlice';
 
 import {
   createStoreAccount,
-} from '../saga';
-import { ReactComponent as MapPin } from '../../../assets/images/signUp/map_pin.svg';
-import { ReactComponent as MapErrorPin } from '../../../assets/images/signUp/map_error_pin.svg';
-import { ReactComponent as LoadingAnimation } from '../../../assets/images/signUp/animated_loading_farm.svg';
+} from '../../saga';
+import { ReactComponent as MapPin } from '../../../../assets/images/signUp/map_pin.svg';
+import { ReactComponent as MapErrorPin } from '../../../../assets/images/signUp/map_error_pin.svg';
+import { ReactComponent as LoadingAnimation } from '../../../../assets/images/signUp/animated_loading_farm.svg';
 import { useTranslation } from 'react-i18next';
-import { getLanguageFromLocalStorage } from '../../../util/getLanguageFromLocalStorage';
-import { useThrottle } from '../../hooks/useThrottle';
-import { pick } from '../../../util/pick';
-import PureAddStoreFront from '../../../components/AddStoreFront';
+import { getLanguageFromLocalStorage } from '../../../../util/getLanguageFromLocalStorage';
+import { useThrottle } from '../../../hooks/useThrottle';
+import { pick } from '../../../../util/pick';
+import PureAddStoreFront from '../../../../components/AddStoreFront';
 
-const StoreSetup = ({
+const ProductStoreSetup = ({
   store,
   user,
   setup,
@@ -33,6 +33,7 @@ const StoreSetup = ({
   const FARMNAME = 'store_name';
   const ADDRESS = 'address';
   const GRID_POINTS = 'grid_points';
+  const STORETYPE = 'type';
   const COUNTRY = 'country';
   const IMG_SRC = 'img_src';
   const STORE_DESC = 'store_desc';
@@ -65,12 +66,13 @@ const StoreSetup = ({
     setValue(LAST_NAME, last_name);
     setValue(PHONE, phone_number);
     setValue(EMAIL, email);
+    setValue(STORETYPE, 'grow-product');
   }, []);
   useEffect(() => {
     if(store.redirect_url) {
       window.location.href = store.redirect_url;
     }
-    if(store.store_id) {
+    if(store.product_store_id) {
       _.map([FARMNAME, ADDRESS, GRID_POINTS, COUNTRY, IMG_SRC, STORE_DESC, CONSENT], field => {
         if(field === GRID_POINTS) {
           setValue(field, JSON.parse(_.get(store, field)), { shouldValidate: true });
@@ -136,7 +138,7 @@ const StoreSetup = ({
       const nStep = 'submission';
       setStep(nStep);
       if(setup) {
-        setSetup(false)
+        setSetup(false);
         return;
       }
       dispatch(createStoreAccount(data));
@@ -286,7 +288,10 @@ const StoreSetup = ({
         onLoad={handleScriptLoad}
       />
       <PureAddStoreFront
-        onGoBack={()=>{ setSetup(false); setStep('name_address')}}
+        onGoBack={() => {
+          setSetup(false);
+          setStep('name_address');
+        }}
         onSubmit={handleSubmit(onSubmit)}
         title={t('ADD_STORE_FRONT.TELL_US_ABOUT_YOUR_STORE')}
         disabled={disabled}
@@ -428,6 +433,6 @@ function MapPinWrapper() {
   return <MapPin style={{ display: 'absolute', transform: 'translate(-50%, -100%)' }} />;
 }
 
-export default StoreSetup;
+export default ProductStoreSetup;
 
 /* global google */

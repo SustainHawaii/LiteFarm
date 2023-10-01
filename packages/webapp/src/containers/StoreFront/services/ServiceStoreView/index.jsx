@@ -3,16 +3,15 @@ import _ from 'lodash';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
-import history from '../../../history';
-import styles from '../../../components/ChooseFarm/ChooseFarmMenu/ChooseFarmMenuItem/chooseFarmMenuItem.module.scss';
-import Card from '../../../components/Card';
+import history from '../../../../history';
+import styles from '../../../../components/ChooseFarm/ChooseFarmMenu/ChooseFarmMenuItem/chooseFarmMenuItem.module.scss';
+import Card from '../../../../components/Card';
 import { CardContent, CardHeader, Typography } from '@material-ui/core';
-import Button from '../../../components/Form/Button';
-import Layout from '../../../components/Layout';
-import Square from '../../../components/Square';
+import Button from '../../../../components/Form/Button';
+import Layout from '../../../../components/Layout';
 import { makeStyles } from '@material-ui/core/styles';
-import { createStripeAccount, viewStripeAccount } from '../saga';
-import { storeProductEdit } from '../../storeFrontSlice';
+import { createStripeAccount, viewStripeAccount } from '../../saga';
+import { storeServiceEdit } from '../../../storeFrontSlice';
 
 const useStyles = makeStyles({
   container: {
@@ -36,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-const StoreView = ({
+const ServiceStoreView = ({
   store,
   setSetup,
 }) => {
@@ -44,8 +43,8 @@ const StoreView = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleEdit = (productDetails) => {
-    dispatch(storeProductEdit(productDetails));
-    history.push('/store_product');
+    dispatch(storeServiceEdit(productDetails));
+    history.push('/store_services');
   };
   
   return (
@@ -66,7 +65,7 @@ const StoreView = ({
       }
     >
       <Card>
-        <CardHeader title={'Store Details'} />
+        <CardHeader title={'Service Store Details'} />
         <div style={{ marginRight: 20, textAlign: '-webkit-right' }}>
           <Button color={'success'} onClick={() => setSetup(true)}>
             {t('STORE_PRODUCT_SETUP.MORE')}
@@ -96,7 +95,7 @@ const StoreView = ({
             
             <div className={styles.addressContainer}>
               <p className={clsx(styles.address)}>
-                <Typography variant={'h6'}>Pickup Address</Typography>
+                <Typography variant={'h6'}>Store Address</Typography>
                 {store.address}
               </p>
             </div>
@@ -105,7 +104,7 @@ const StoreView = ({
         </CardContent>
       </Card>
       <Card style={{ marginTop: 20 }}>
-        <CardHeader title={'Listed Products'} />
+        <CardHeader title={'Listed Services'} />
         <div style={{ marginRight: 20, textAlign: '-webkit-right' }}>
           <Button color={'success'} onClick={() => handleEdit()}>
             {t('STORE_PRODUCT_SETUP.ADD')}
@@ -124,7 +123,7 @@ const StoreView = ({
           marginBottom: 10,
         }}
         >
-          {_.map(store.products, ({ storeProducts }) => (
+          {_.map(_.filter(store.products, (product) => product.type.indexOf('service') >= 0), (storeProducts) => (
             <Card key={storeProducts.productId}
                   onClick={() => handleEdit(storeProducts)} style={{
               minHeight: 200,
@@ -141,7 +140,7 @@ const StoreView = ({
             }}>
               <p>
                 <img
-                  src={storeProducts.imageSrc}
+                  src={_.first(JSON.parse(storeProducts.imageSrc)).src}
                   width={100}
                   height={100}
                   style={{ marginLeft: 50, marginTop: 10 }} />
@@ -151,9 +150,6 @@ const StoreView = ({
                   {storeProducts.title}
                 </h5>
               </p>
-              <div className={classes.cropCountContainer}>
-                <span style={{ margin: 'auto' }}>Qty : <Square>{storeProducts.quantity} </Square></span>
-              </div>
             </Card>
           ))}
         </CardContent>
@@ -162,5 +158,5 @@ const StoreView = ({
   );
 };
 
-export default StoreView;
+export default ServiceStoreView;
 

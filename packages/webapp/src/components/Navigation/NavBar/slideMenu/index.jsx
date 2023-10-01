@@ -81,6 +81,19 @@ function SlideMenu({ history, manageOpen, closeDrawer, toggleManage, showFinance
                   primary={t('SLIDE_MENU.STORE_FRONT')}
                 />
               </ListItem>
+              
+            )}
+            {isAdmin && (
+              <ListItem
+                className={classes.subListItem}
+                button
+                onClick={() => handleClick('/service_front')}
+              >
+                <ListItemText
+                  classes={{ primary: classes.subListItemText }}
+                  primary={t('SLIDE_MENU.SERVICE_FRONT')}
+                />
+              </ListItem>
             )}
             {isAdmin && (
               <ListItem

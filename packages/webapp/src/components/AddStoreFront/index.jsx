@@ -8,7 +8,7 @@ import PageTitle from '../PageTitle/v2';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
-import EnglishOwnerConsent from '../../containers/StoreFront/locales/en/Owner.Consent.md';
+import EnglishOwnerConsent from '../../containers/StoreFront/product/locales/en/Owner.Consent.md';
 import clsx from 'clsx'
 import styles from '../Consent/consent.module.scss'
 import storeStyles from './store.scss'

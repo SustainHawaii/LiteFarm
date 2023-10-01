@@ -38,10 +38,8 @@ const DO_ENDPOINT = 'nyc3.digitaloceanspaces.com';
 const MINIO_ENDPOINT = process.env.MINIO_ENDPOINT;
 
 const s3 = new S3({
-  endpoint: process.env.NODE_ENV === 'development' ? MINIO_ENDPOINT : DO_ENDPOINT,
-  accessKeyId: process.env.DO_SPACES_ACCESS_KEY_ID,
-  secretAccessKey: process.env.DO_SPACES_SECRET_ACCESS_KEY,
-  s3ForcePathStyle: process.env.NODE_ENV === 'development' ? true : false,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
 async function imaginaryPost(

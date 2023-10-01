@@ -79,6 +79,7 @@ import { GlobalScss } from './components/GlobalScss';
 import irrigationTaskTypesSaga from './containers/Task/IrrigationTaskTypes/saga';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import chooseStoreSaga from './containers/StoreFront/saga'
+import storeImageUploaderSaga from './containers/StoreImagePickerWrapper/saga';
 
 const clientId = import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID;
 
@@ -138,6 +139,7 @@ sagaMiddleware.run(sensorReadingsSaga);
 sagaMiddleware.run(uploadDocumentSaga);
 sagaMiddleware.run(documentSaga);
 sagaMiddleware.run(imageUploaderSaga);
+sagaMiddleware.run(storeImageUploaderSaga);
 sagaMiddleware.run(certificationsSaga);
 sagaMiddleware.run(taskSaga);
 sagaMiddleware.run(abandonAndCompleteManagementPlanSaga);

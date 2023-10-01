@@ -4,18 +4,18 @@ import {
   userFarmSelector,
 } from '../userFarmSlice';
 
-import { farmProductStoreSelector } from '../storeFrontSlice';
-import ProductSetup from './ProductSetup';
+import { farmServiceStoreSelector } from '../storeFrontSlice';
+import ServiceSetup from './ServiceSetup';
 import { tasksSelector } from '../taskSlice';
 
-const StoreProduct = () => {
-  const store = useSelector(farmProductStoreSelector);
+const StoreService = () => {
+  const store = useSelector(farmServiceStoreSelector);
   const tasks = useSelector(tasksSelector);
   const user = useSelector(userFarmSelector);
   return (
-    <ProductSetup store={store} tasks={tasks} user={user} />
+    <ServiceSetup store={store} tasks={tasks} user={user} />
   );
 };
 
-export default StoreProduct;
+export default StoreService;
 

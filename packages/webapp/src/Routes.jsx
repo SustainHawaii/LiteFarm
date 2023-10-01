@@ -28,8 +28,10 @@ import { userFarmSelector } from './containers/userFarmSlice';
 import { chooseFarmFlowSelector } from './containers/ChooseFarm/chooseFarmFlowSlice';
 import useScrollToTop from './containers/hooks/useScrollToTop';
 import { useReduxSnackbar } from './containers/Snackbar/useReduxSnackbar';
-import StoreFront from './containers/StoreFront';
+import ProductStoreFront from './containers/StoreFront/product';
 import StoreProduct from './containers/StoreProduct';
+import ServiceStoreFront from './containers/StoreFront/services';
+import StoreService from './containers/StoreService';
 
 //dynamic imports
 const Home = React.lazy(() => import('./containers/Home'));
@@ -368,8 +370,10 @@ const Routes = () => {
             <Route path='/profile' exact component={Account} />
             <Route path='/people' exact component={People} />
             <Route path='/farm' exact component={Farm} />
-            <Route path='/store_front' exact component={StoreFront} />
+            <Route path='/store_front' exact component={ProductStoreFront} />
             <Route path='/store_product' exact component={StoreProduct} />
+            <Route path='/service_front' exact component={ServiceStoreFront} />
+            <Route path='/store_services' exact component={StoreService} />
             <Route path='/user/:user_id' exact component={EditUser} />
             <Route path='/consent' exact component={ConsentForm} />
             <Route path='/crop/new' exact component={AddNewCrop} />

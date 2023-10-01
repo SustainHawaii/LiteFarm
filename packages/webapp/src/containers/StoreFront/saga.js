@@ -22,7 +22,6 @@ import {
 import { createAction } from '@reduxjs/toolkit';
 import { axios, getHeader } from '../saga';
 import {
-  farmStoreSelector,
   getStoreStripeSuccess,
   getUserFarmStoresSuccess,
   setLoadingStart,
@@ -33,11 +32,9 @@ import {
   postStoreSuccess,
   redirectStripeSuccess,
   selectStoreSuccess,
-  getProductStoresSuccess,
+  getProductStoresSuccess, farmProductStoreSelector, farmServiceStoreSelector,
 } from '../storeFrontSlice';
 import history from '../../history';
-import { enqueueErrorSnackbar } from '../Snackbar/snackbarSlice';
-import i18n from '../../locales/i18n';
 
 export const getFarmStores = createAction('getFarmStoresSaga');
 
@@ -80,14 +77,17 @@ export function* createStoreAccountSaga({ payload: { ...postData } }) {
   const { farmStoreUrl } = apiConfig;
   try {
     const { farm_id, user_id } = yield select(loginSelector);
-    const store = yield select(farmStoreSelector);
-    const { stripe_account_id } = store;
+    const pstore = yield select(farmProductStoreSelector);
+    const sstore = yield select(farmServiceStoreSelector);
+    
+    const stripe_account_id = pstore.stripe_account_id || sstore.stripe_account_id;
     const { phone_number, last_name, first_name } = postData;
     let storeData = {
       store_name: postData.store_name,
       address: postData.address,
       grid_points: postData.grid_points,
       country: postData.country,
+      type: postData.type,
       img_src: `${postData.img_src}`,
       store_desc: postData.store_desc,
       consent_checkbox: postData.consent_checkbox,
@@ -95,7 +95,6 @@ export function* createStoreAccountSaga({ payload: { ...postData } }) {
       phone_number,
       farm_id,
     };
-    
     const stripeData = {
       phone_number,
       last_name,
@@ -116,7 +115,12 @@ export function* createStoreAccountSaga({ payload: { ...postData } }) {
       yield put(redirectStripeSuccess({ redirect_url: resultState.data?.url }));
     }
     yield put(postStoreSuccess(storeCreated));
-    yield put(selectStoreSuccess({ store_id }));
+    if(postData.type === 'grow-service') {
+      yield put(selectStoreSuccess({ service_store_id: store_id }));
+    } else {
+      yield put(selectStoreSuccess({ product_store_id: store_id }));
+    }
+    
   } catch (error) {
     yield put(onLoadingFarmStoresFail(error));
     console.log('failed to fetch farm stores from database');
@@ -154,6 +158,21 @@ export function* createStripeAccountSaga() {
     yield put(setLoadingStart());
     const resultState = yield call(axios.post, farmStoreUrl + '/createStripe/' + farm_id, stripeData, header);
     yield put(redirectStripeSuccess({ redirect_url: resultState.data?.url }));
+  } catch (error) {
+    yield put(onLoadingFarmStoresFail(error));
+  }
+}
+
+export const createStoreService = createAction('createStoreServiceSaga');
+
+export function* createStoreServiceSaga({ payload }) {
+  const { farmStoreUrl } = apiConfig;
+  try {
+    const { farm_id, user_id } = yield select(loginSelector);
+    const header = getHeader(user_id, farm_id);
+    yield put(setLoadingStart());
+    const resultState = yield call(axios.post, farmStoreUrl + '/createProduct/' + farm_id, payload, header);
+    yield call(history.push, '/service_front');
   } catch (error) {
     yield put(onLoadingFarmStoresFail(error));
   }
@@ -242,7 +261,11 @@ export function* postStoreSaga({ payload: { showFarmNameCharacterLimitExceededEr
     const store = addStoreResult.data;
     const { store_id } = store;
     yield put(postStoreSuccess(store));
-    yield put(selectStoreSuccess({ store_id }));
+    if(store.type === 'grow-service') {
+      yield put(selectStoreSuccess({ service_store_id: store_id }));
+    } else {
+      yield put(selectStoreSuccess({ product_store_id: store_id }));
+    }
     
   } catch (e) {
     yield put(setLoadingEnd());
@@ -252,8 +275,7 @@ export function* postStoreSaga({ payload: { showFarmNameCharacterLimitExceededEr
 export const patchStore = createAction('patchStoreSaga');
 
 export function* patchStoreSaga({ payload: { showFarmNameCharacterLimitExceededError, ...store } }) {
-  const { store_id, farm_id } = yield select(farmStoreSelector);
-  const { user_id } = yield select(loginSelector);
+  const { farm_id, user_id } = yield select(loginSelector);
   const header = getHeader(user_id, farm_id);
   
   let patchStoreData = {
@@ -267,9 +289,14 @@ export function* patchStoreSaga({ payload: { showFarmNameCharacterLimitExceededE
   };
   const { farmStoreUrl } = apiConfig;
   try {
+    const { store_id } = store;
     const patchedStore = yield call(axios.patch, `${farmStoreUrl}/${store_id}`, patchStoreData, header);
     const store = patchedStore.data[0];
-    yield put(patchStoreSuccess({ ...store, store_id }));
+    if(store.type === 'grow-service') {
+      yield put(patchStoreSuccess({ ...store, service_store_id: store_id }));
+    } else {
+      yield put(patchStoreSuccess({ ...store, product_store_id: store_id }));
+    }
   } catch (e) {
     console.error(e);
   }
@@ -286,5 +313,6 @@ export default function* chooseStoreSaga() {
   yield takeLatest(createStoreProduct.type, createStoreProductSaga);
   yield takeLatest(getFarmProducts.type, getFarmProductsSaga);
   yield takeLatest(searchFood.type, searchFoodSaga);
+  yield takeLatest(createStoreService.type, createStoreServiceSaga);
   yield takeLatest(updateStoreProduct.type, updateStoreProductSaga);
 }

@@ -9,7 +9,6 @@ import { pick } from '../../../util/pick';
 import { CardContent, CardHeader, CircularProgress, TextField, Typography } from '@material-ui/core';
 import Card from '../../../components/Card';
 import Select from 'react-select';
-import useReactSelectStyles from '../../../components/Form/Unit/useReactSelectStyles';
 import Input from '../../../components/Form/Input';
 import Button from '../../../components/Form/Button';
 import Form from '../../../components/Form';
@@ -45,7 +44,7 @@ const ProductSetup = ({
   const [foodItems, setFoodItems] = useState([]);
   
   useEffect(() => {
-    if(!store.store_id) {
+    if(!store.product_store_id) {
       dispatch(getFarmStores());
     }
     if(store.selected_product) {
@@ -122,6 +121,7 @@ const ProductSetup = ({
       { value: store.selected_product.crop_key });
   }
   const CROPNAME = 'crop_common_name';
+  const TYPE = 'type';
   const PRODUCTNAME = 'product_name';
   const CROPKEY = 'crop_key'
   const FDCID = 'fdc_id';
@@ -324,6 +324,7 @@ const ProductSetup = ({
   }
   const onSubmit = (data) => {
     data.store_name = store.store_name;
+    data[TYPE] = 'grow-product';
     if(store.selected_product) {
       data.variantId = store.selected_product.variantId
       data.productId = store.selected_product.productId
