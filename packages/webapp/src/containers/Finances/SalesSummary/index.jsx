@@ -8,7 +8,7 @@ import { getSales, setSelectedSale } from '../actions';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import DateRangeSelector from '../../../components/Finances/DateRangeSelector';
-import { BsCaretRight } from 'react-icons/all';
+import { BsCaretRight } from 'react-icons/bs';
 import { userFarmSelector } from '../../userFarmSlice';
 import { withTranslation } from 'react-i18next';
 import { Semibold } from '../../../components/Typography';

@@ -39,7 +39,7 @@ import {
 } from './selectors';
 
 import InfoBoxComponent from '../../components/InfoBoxComponent';
-import { BsChevronRight } from 'react-icons/all';
+import { BsChevronRight } from 'react-icons/bs';
 import { userFarmSelector } from '../userFarmSlice';
 import { Semibold, Text, Title } from '../../components/Typography';
 
