@@ -1,0 +1,83 @@
+.button-container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  width: 65vw;
+  right: auto;
+  left: 2.2vw;
+  top: 5rem;
+  height: 8rem;
+}
+
+.task-button{
+  box-shadow: none;
+  background-color: #4bb7c3;
+  height: 43px;
+  width: 125px;
+  color: #edf8f9;
+  font-family: 'Poppins';
+  margin-left: 1rem
+}
+.task-button:hover{
+  box-shadow: none;
+  background-color:#4bb7c3 ;
+  color:  #edf8f9;
+  ;
+}
+.container-button{
+  box-shadow: none;
+  background-color: #edf8f9;
+  height: 2.8rem;
+  width: 12rem;
+  color: #4bb7c3;
+  font-family: 'Poppins';
+  margin-left: 0.2rem
+}
+.container-button:hover{
+  box-shadow: none;
+  background-color:#4bb7c3 ;
+  color: #edf8f9;
+  border-width: 0.2rem ;
+
+}
+@media only screen and (max-width: 767px) {
+  .container-button{
+    box-shadow: none;
+    background-color: #edf8f9;
+    height: 2.8rem;
+    width: 75%;
+    color: #4bb7c3;
+    font-family: 'Poppins';
+    margin-left: 1rem
+  }
+  .task-button:hover{
+    box-shadow: none;
+    background-color:#4bb7c3 ;
+    color: #edf8f9;
+    border-radius: 1rem ;
+    border-color: #4bb7c3
+  
+  }
+}
+    
+.option-container{
+  color:#ccc;
+  margin:1.1rem;
+  
+}
+
+.option-container:hover{
+  background-color: #4bb7c3;
+  color:'#edf8f9'
+}
+
+.container2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 5rem;
+  
+}

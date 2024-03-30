@@ -1,0 +1,35 @@
+#list:hover {
+    background-color: #f8f9fa;
+    color: #9f9f9f;
+}
+.list-text{
+    color:#9f9f9f;
+    font-weight: lighter;
+    font-size:14px;
+}
+.active-bar{
+    height: 5rem;
+    width: 4.2px;
+    display: flex;
+    position: absolute;
+    background-color: #4bb7c3;
+    left: 11px;
+}
+.toggleDisplay{
+    display: none;
+}
+.mybutton{
+    border: none;
+    width: 13rem;
+     background-color: transparent;
+     color: #9f9f9f;
+}
+.fontweight{
+    font-weight :400;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+.drawer-closing {
+    transition: left 0.5s ease-out;
+  }

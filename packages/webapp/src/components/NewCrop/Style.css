@@ -1,0 +1,60 @@
+/* this style for crop page */
+.top-heading{
+    font-size: 42px;
+    font-family: "Montserrat", sans-serif;
+    top: -40px;
+    font-style: normal;
+    position: relative;
+    font-weight: 300;
+    color: #54706c;
+    
+}
+.crop-card{
+    top: -42px;
+}
+.card-content{
+    padding: 20px;
+    color: #454949;
+}
+.crop-form{
+    position: relative;
+    top: 12px;
+    display: flex;
+}
+.filter-logo{
+    height: 30px;
+    width: 30px;
+    left: 12px;
+    position: relative;
+}
+.top-heading2{
+    font-weight: 400;
+    padding: 8px;
+    left: 0px;
+    position: relative;
+    font-size: 18px;
+    
+}
+.farm-top-button{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.farm-button{
+    width: 105px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #edf8f9;
+    color: #4bb7c3;
+}
+.farm-button:hover{
+    background-color: #edf8f9;
+    color: #4bb7c3;
+}
+.check-box{
+    height: 30px;
+    width: 30px;
+}

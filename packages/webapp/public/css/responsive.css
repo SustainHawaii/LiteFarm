@@ -1,0 +1,29 @@
+@media  (max-device-width: 1030px) or (max-width: 900px){
+  .navbar {
+    padding: 15px 0px;
+  }
+  .navbar .nav_link {
+    width: 60px;
+    height: 34px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    line-height: 12px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 400;
+  }
+  .navbar .nav_item+.nav_item {
+    margin-left: 0px;
+  }
+  .navmenumain ul li {
+    margin-bottom: 5px;
+    width: 70%;
+  }
+  .nav_menu {
+    margin: auto;
+    flex-direction: column;
+    width: 100%;
+  }
+
+
+}

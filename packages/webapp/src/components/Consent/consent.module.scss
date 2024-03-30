@@ -1,0 +1,20 @@
+.floatLabelRight {
+  float: right;
+}
+
+.consentTextContainer {
+  font-family: 'Open Sans', ' SansSerif', serif;
+  height: 0;
+  flex-grow: 1;
+  width: 100%;
+  overflow-y: scroll;
+  display: flex;
+  row-gap: 20px;
+  flex-direction: column;
+  padding-bottom: 40px;
+  height:'45vh'!important
+}
+
+.consentTextContainer li {
+  margin-left: 20px;
+}

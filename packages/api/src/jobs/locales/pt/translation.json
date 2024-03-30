@@ -1,0 +1,102 @@
+{
+  "EXPORT_README_TITLE": "Entendendo sua exportação de certificação",
+  "N": "N",
+  "N/A": "N/A",
+  "NO": "Não",
+  "NOT_SURE": "Não tem certeza",
+  "OPERATION_NAME": "NOME DA OPERAÇÃO",
+  "RECORD_A": {
+    "ACRES": "Acres",
+    "AREA": "Área",
+    "BUILDING": "(construções, bosque, área de biodiversidade, estrada)",
+    "CERTIFIED": "Certificado",
+    "CROPS_OR_ANIMALS": "Cultivo(s) ou espécie de animal por unidade",
+    "CURRENT_STATUS": "Situação atual - marque um por unidade",
+    "EXPORT_DOCUMENT_NAME": "REGISTRO A",
+    "HEADER": "Registro A - Identificação do Local",
+    "HECTARES": "Hectares",
+    "INDIVIDUAL_PRODUCTION_UNIT": "para cada Unidade de Produção individual (ex: local/campo/área definida -   de acordo com a sua operação e nomeado em seu mapa)",
+    "NAME_OR_ID": "Nome ou número de identificação",
+    "NEW": "Nova",
+    "NEW_AREA": "Área (adicionada este ano)",
+    "NON_ORGANIC": "Área não-orgânica em",
+    "NON_PRODUCING": "Não produtivo",
+    "OPERATION_NAME": "NOME DA OPERAÇÃO",
+    "ORGANIC_AREA": "Área Orgânica",
+    "PLEASE_VERIFY": "Por favor, verifique os detalhes e realize todas as alterações necessárias anualmente. Se a Operação acontece em locais diferentes, certifique-se de descrever cada local separadamente. Confira a guia de exemplos para ver como preencher este formulário.",
+    "PRODUCTION": "produção",
+    "REMOVED": "Removido do Programa",
+    "REPORTING_PERIOD": "Período do Relatório",
+    "ROW_FT": "Linha Pés",
+    "ROW_M": "Linha M",
+    "SIZE_IN_PREFERRED_UNIT": "Tamanho na unidade de medida de preferência",
+    "SPLIT": "Dividido/Paralelo",
+    "SQ_FT": "Pés quadrados ",
+    "SQ_M": "Metro quadrado",
+    "TRANSITIONAL": "Transitória",
+    "WHY_REMOVED": "Motivo da remoção ou outras observações"
+  },
+  "RECORD_D": {
+    "DATE_COMPLETED": "Data de Conclusão",
+    "EXPORT_DOCUMENT_NAME": "REGISTRO D",
+    "FROM": "De",
+    "HEADER": "Registro D- Sementes e Mudas",
+    "NOTE": {
+      "LIST_ALL": "Liste TODAS as sementes e mudas utilizadas durante o período de registro. Tenha em mente:",
+      "ONE": "Certifique-se de que os recibos de compra, rótulos, etiquetas e certificados orgânicos de todas as sementes/mudas estejam disponíveis para revisão durante a inspeção.",
+      "TWO": {
+        "A": "Pesquisa de disponibilidade comercial",
+        "B": "Documentação que comprove que as sementes não são organismos geneticamente modificados (OGMs)",
+        "C": "Documentação que confirme que qualquer tratamento, como inoculantes ou revestimentos de sementes, esteja na lista de substâncias permitidas",
+        "PART_1": "Quando for utilizada",
+        "PART_2": "semente/muda não orgânica",
+        "PART_3": "a seguinte documentação deve estar disponível na inspeção"
+      }
+    },
+    "REPORTING_PERIOD": "Período de Registro",
+    "TABLE_COLUMN": {
+      "IS_SEARCH_COMPLETED": "Se não existir disponibilidade comercial, foi realizada a pesquisa (S/N)",
+      "LIST_SEED_TREATMENTS": "Listar tratamento de sementes (caso exista)",
+      "LOT_NUMBER": "Número do Lote (quando aplicável)",
+      "NON_GE_DOCS_AVAILABLE": "Documentos que comprovem que não são OGMs (S/N)",
+      "NOTES": "Observações/Datas do plantio de perenes/etc.",
+      "SEED_CROP_OR_PLANTING_STOCK": "Variedade da semente/muda",
+      "STATUS_CERTIFIED_ORGANIC": "Tipo de semente/muda = Certificado Orgânico (S/N)",
+      "SUPPLIER": "Fonte/Fornecedor",
+      "TREATMENT_DOCS_AVAILABLE": "Documentos do Tratamento disponíveis (S/N)"
+    },
+    "TO": "Até"
+  },
+  "RECORD_I": {
+    "CLEANERS": "Produtos de limpeza",
+    "CROP_PRODUCTION_AIDS": "Materiais e equipamentos para produção dos cultivos",
+    "EXPORT_DOCUMENT_NAME": "REGISTRO I",
+    "HEADER": "Registro I",
+    "INPUT_CATEGORY": "Categoria do Insumo",
+    "LOCATIONS": "Localização(ões)",
+    "NOTE": {
+      "LIST_ALL": "Liste TODOS os insumos usados nos últimos 12 meses ou desde seu último Registro I. Você pode utilizar este documento para manter um registro contínuo dos insumos usados ao longo da temporada.",
+      "LIVESTOCK_INPUTS": "Observação: Insumos para o gado: Alimentos, aditivos para rações e suplementos alimentares, produtos de saúde, insumos adicionais para a produção, camas de animais, etc. devem ser listados no Registro LI - Insumos para o gado.",
+      "ONE": {
+        "PART_1": "Adubação e correção de solo, nutrientes do cultivo, materiais adicionais para a produção do cultivo e materiais:",
+        "PART_2": "por ex. cobertura seca, fertilizantes, sprays foliares, composto, estrume, misturas ou componentes de solo para vasos, musgo, corretivos de solo, etc."
+      },
+      "PLEASE_USE_SEPARATE_RECORD": "Por favor, use um Registro I para cada categoria de insumo conforme descrito abaixo e faça o envio de cada no local de envio correspondente da Seção 99 - Envios:",
+      "PREP_INPUTS": "Observação: Preparação de insumos: Aditivos alimentares, Outros ingredientes, Insumos adicionais do processamento devem ser listados no Registro PM - Processamento dos principais ingredientes e lista de insumos adicionais para o processamento.",
+      "TWO": "Produtos de limpeza, desinfetantes, sanitizantes, substâncias para controle de pragas."
+    },
+    "REPORTING_PERIOD": "PERÍODO DO RELATÓRIO",
+    "TABLE_COLUMN": {
+      "CROP_FIELD_APPLIED_TO": "Cultivo/Campo/Unidade produtiva de aplicação",
+      "DATE_USED": "Data de Uso",
+      "LISTED_IN_PSL": "Está na Lista de Substâncias Permitidas? (S/N)",
+      "NOTES": "Observações",
+      "PRODUCT_NAME": "Nome do Produto",
+      "QUANTITY": "Quantidade ({{unit}})",
+      "SUPPLIER": "Nome da marca, fonte ou fornecedor"
+    },
+    "VARIETALS": "Variedade(s)"
+  },
+  "Y": "S",
+  "YES": "Sim"
+}

@@ -1,0 +1,120 @@
+
+/***** header start *************/
+.hedr {
+    transition: all 600ms ease-in-out;
+    background: #fff;
+    width: 100%;
+    z-index: 1;
+}
+
+.nav_item a:hover {
+    color: #41b0c0;
+}
+
+/* navbar ****************/
+.nav_menu {
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+.nav_menu_top {
+  display: flex;
+  align-items: center;
+}
+
+/*
+.navbar .nav_link {
+    font-size: 15px;
+    letter-spacing: 0px;
+    line-height: normal;
+    color: #040413;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+*/
+
+.navbar .nav_item + .nav_item {
+    margin-left: 0px;
+}
+
+.navbar .nav_link {
+    height: 44px;
+    /*border-radius: 5px;*/
+    background-color: #41b0c0;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 32px;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: 600;
+    border: 1px solid #41b0c0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.active_nav {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19) !important;
+}
+
+
+.navbar .nav_link:hover {
+    background: transparent;
+    color: #f1f1f6;
+    border-color: #24245e;
+}
+
+.navbar_brand img {
+    max-width: 350px;
+}
+.navbar_brand {
+  margin-left: -100px;
+  margin-top: 50px;
+}
+.nav_function {
+    margin-left: 44px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav_function a {
+    position: relative;
+}
+
+.navmenumain {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+}
+.navmenumain ul li a {
+  text-decoration: none;
+}
+.navmenumain ul, ol {
+  list-style: none;
+  padding-left: 0px;
+}
+.navmenumain .nav_menu_top {
+  width: 100%;
+}
+.navmenumain .nav_menu_top .nav_item {
+  width: 18%;
+}
+.navmenumain .nav_menu_top .nav_item .nav_link{
+  width: 100%;
+}
+
+.hedr .navbar {
+    position: relative;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    min-height: 110px;
+}
+
+.nav_togge_btn {
+    display: none;
+}
+

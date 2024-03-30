@@ -1,0 +1,5 @@
+@media screen and (max-width: 768px) {
+  .con1, .con2 {
+      width: 90%; /* Adjust width for smaller screens */
+  }
+}

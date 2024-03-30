@@ -1,0 +1,91 @@
+@import '../../../assets/mixin';
+
+.container {
+  display: flex;
+  column-gap: 4px;
+  position: relative;
+  padding-left: 24px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-bottom: 6px;
+  width: fit-content;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+}
+
+.checkmark svg {
+  overflow: visible; /* To fix the SVG bounding box slightly cutting off the stroke in Safari at some zoom levels */
+}
+
+/* The outer circle */
+.checkmark svg circle:first-child {
+  stroke: var(--grey600);
+  stroke-width: 2;
+  fill: white;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark svg circle:last-child {
+  fill: var(--green);
+  visibility: hidden;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark svg circle:last-child {
+  visibility: visible;
+}
+
+.container input:checked ~ .label {
+  color: var(--green);
+}
+
+/* When the radio button is checked, make border blue */
+.container input:checked ~ .checkmark svg circle:first-child {
+  stroke: var(--green);
+}
+
+.disabled {
+  cursor: auto;
+}
+
+.container input:disabled ~ .checkmark svg circle:first-child {
+  fill: var(--grey200);
+  stroke: var(--grey400);
+}
+
+.container input:disabled ~ .label {
+  color: var(--grey600);
+}
+
+.container input[disabled]:checked ~ .checkmark svg circle:first-child {
+  fill: var(--teal500);
+  stroke: var(--green);
+}
+
+.label {
+  transform: translateY(-5px);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--grey900);
+  font-style: normal;
+  font-weight: normal;
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+}

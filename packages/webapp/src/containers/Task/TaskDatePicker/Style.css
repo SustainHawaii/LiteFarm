@@ -1,0 +1,69 @@
+
+.datepicker-container {
+    position: relative;
+}
+
+.datepicker-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.datepicker-input:focus {
+    border: 1px solid #007bff;
+}
+
+.datepicker-calendar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 0.1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.datepicker-calendar.active {
+    display: block;
+}
+
+.datepicker-calendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.datepicker-calendar th,
+.datepicker-calendar td {
+    padding: 10px;
+    text-align: center;
+}
+
+.datepicker-calendar th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.datepicker-calendar td {
+    cursor: pointer;
+}
+
+.datepicker-calendar td:hover {
+    background-color: #f2f2f2;
+}
+
+.custom-datepicker {
+    width: 24vw;
+    height: 54px;
+    font-size: 22px;
+    color: #ccc;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-bottom: 3rem;
+}
+#filled-full-width{
+    background-color: transparent;
+}

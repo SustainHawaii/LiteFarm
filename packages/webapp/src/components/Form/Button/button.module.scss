@@ -1,0 +1,96 @@
+@import '../../../assets/mixin';
+.primary {
+  background-color: var(--btnPrimary);
+  color: var(--grey100);
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(102, 115, 138, 0.3);
+  border: 1px solid var(--green);
+}
+
+.secondary {
+  background-color: var(--btnSecondary);
+  color: var(--green);
+  border: 1px solid var(--green);
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.success {
+  background-color: var(--btnSecondary);
+  color: var(--green);
+  border-color: var(--green);
+  border: 1px solid;
+  box-sizing: border-box;
+  text-decoration: none;
+  box-shadow: 0px 2px 4px rgba(102, 115, 138, 0.3);
+}
+
+.error {
+  background-color: var(--error);
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(102, 115, 138, 0.3);
+  border: none;
+}
+
+.warning {
+  background-color: var(--brown700);
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(102, 115, 138, 0.3);
+  border: none;
+}
+
+
+.btn {
+  border-radius: 4px;
+  font-weight: 600;
+  size: 16px;
+  line-height: 24px;
+  min-height: 48px;
+  padding: 0 16px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:disabled {
+  border: none;
+  color: var(--inputDisabled);
+  background-color: var(--btnDisabled);
+  box-shadow: none;
+  cursor: default;
+}
+
+.primary:hover:enabled {
+  color: var(--green);
+  background-color: var(--btnHoverPrimary);
+  box-shadow: 0px 4px 12px rgba(102, 115, 138, 0.4);
+  border-color: var(--green);
+}
+
+.secondary:hover:enabled {
+  border-color: var(--green);
+  background-color: var(--green);
+  color: var(--grey100);
+  
+}
+.primary,
+.secondary {
+  transition: all 0.3s ease; /* You can adjust the duration and easing function */
+}
+.fullLength {
+  width: 100%;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.sm {
+  font-size: 14px;
+  min-height: 32px;
+  padding: 0 16px;
+}

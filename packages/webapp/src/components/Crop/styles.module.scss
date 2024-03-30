@@ -1,0 +1,77 @@
+.headerContainer {
+  --header-height: 120px;
+  margin: -24px -24px 0;
+  background-color: var(--grey200);
+  width: auto;
+  height: var(--header-height);
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 18px;
+}
+
+
+.headerInfoWrapper {
+  width: min(75%, 800px);
+}
+
+.headerTitle {
+  color: var(--teal900);
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 32px;
+  display: inline-block;
+  margin-bottom: 14px;
+  width: min(90%, 700px);
+}
+
+.textOverFlowBehaviour {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.italicText{
+  font-style: italic;
+}
+
+.headerTitleContainer {
+  margin-top: 15px;
+  padding-left: 25px;
+  width: 100%;
+}
+
+.headerAttributesContainer {
+  margin-top: -6px;
+  padding-left: 25px;
+  width: min(75vw, 800px);
+}
+
+.attributeText {
+  display: inline;
+  color: var(--teal900);
+  font-weight: 300;
+}
+
+.imgContainer {
+  align-self: center;
+  @media only screen and (min-width: 700px) {
+    transform: translateX(25%);
+  }
+}
+
+.labelToRadioDistance {
+  margin-bottom: 18px;
+}
+
+.innerRadioDistance {
+  margin-bottom: 16px;
+}
+
+.radioToLabelDistance {
+  margin-bottom: 34px;
+}
+.supplierContainer{
+  margin-top:5px;
+}

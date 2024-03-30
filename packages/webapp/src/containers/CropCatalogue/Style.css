@@ -1,0 +1,20 @@
+/* @import url('./../../../public/global.css/font-family/.poppins-light'); */
+
+.heading{
+    color: #54706c;
+    font-weight: 300;
+    position: relative;
+    top: 20px;
+    left: 28px;
+    display: block;
+    font-style: normal;
+    margin-bottom: 3rem;
+}
+.sub-heading{
+    font-size: 23px;
+    letter-spacing: 0px;
+    color: red;
+    font-weight: 300;
+    padding-bottom: 15px;
+}
+/* D:\Important\quarkifi projects\grow2\LiteFarm\packages\webapp\public\global.css */

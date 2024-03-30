@@ -1,0 +1,23 @@
+.dropdownHead {
+  display: flex;
+  align-items: center;
+}
+
+.dropdownBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.paFieldContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -8px;
+}
+
+.circleImg {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  height: 120px;
+  width: 120px;
+  border-radius: 70%;
+}
