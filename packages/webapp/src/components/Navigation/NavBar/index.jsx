@@ -133,6 +133,8 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'flex-start',
+    backgroundColor : 'white',
+    marginTop : '-15px',
     flexGrow: 1,
     alignItems: 'center',
     [theme.breakpoints.up('md')]: {
@@ -592,7 +594,7 @@ const Logo = ({ history }) => {
   return (
     <img
       src={truewealthLogo}
-      style={{ marginLeft: matches ? '-20vw' : matches2 ? "-9vw" : matches3 ? "-4vw" : (matches4 || matches5) ? "0vw" : "26vw", cursor: 'pointer', height: (matches4 || matches5) ? '100px' : "115px", position: 'relative', }}
+      style={{ marginLeft: matches ? '-10vw' : matches2 ? "-5vw" : matches3 ? "-4vw" : (matches4 || matches5) ? "0vw" : "26vw", cursor: 'pointer', height: (matches4 || matches5) ? '100px' : "115px", position: 'relative', }}
       alt="Logo"
       onClick={() => history.push('/')}
     />

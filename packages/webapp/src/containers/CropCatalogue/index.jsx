@@ -86,7 +86,6 @@ export default function CropCatalogue({ history }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      position: 'absolute',
       right: '-1rem',
       color: '#c7c7c7',
       marginTop: '-1rem',
@@ -167,7 +166,7 @@ export default function CropCatalogue({ history }) {
 
         <div>
           <Layout
-            classes={{ container: { position: "relative", width: '100vw', marginLeft: marginSetter ? '-19vw' : marginSetter2 ? "0vw" : marginSetter3 ? "0vw" : "-1vw" } }}
+            classes={{ container: { position: "relative", width: '100vw', marginLeft: marginSetter ? '0vw' : marginSetter2 ? "0vw" : marginSetter3 ? "0vw" : "-1vw" } }}
             style={{ borderRadius: '10rem', width: '100%' }}
           >
             <h1 className="heading " style={{ fontFamily: 'Poppins',left:'0rem' ,fontWeight:'bold'}}>
