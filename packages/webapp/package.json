@@ -1,7 +1,7 @@
 {
-  "name": "litefarm-webapp",
+  "name": "grow-webapp",
   "version": "3.3.2",
-  "description": "LiteFarm Web application",
+  "description": "Grow Web application",
   "type": "module",
   "scripts": {
     "dev": "vite --host",

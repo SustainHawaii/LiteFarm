@@ -30,7 +30,6 @@ export default function PureCustomSignUp({
     <form onSubmit={onSubmit} className={styles.home} style={classes.form}>
       <div className={styles.lander}>
         <div className={styles.greetContainer}>
-          <Logo />
           {(!isChrome || !!errorMessage) && (
             <div className={styles.otherBrowserMessageTop}>
               {!!errorMessage ? (
