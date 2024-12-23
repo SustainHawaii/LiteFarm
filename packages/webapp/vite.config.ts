@@ -4,6 +4,7 @@ import mdx from '@mdx-js/rollup';
 import svgrPlugin from 'vite-plugin-svgr';
 import IstanbulPlugin from 'vite-plugin-istanbul';
 import { VitePWA } from 'vite-plugin-pwa';
+import { viteSingleFile } from 'vite-plugin-singlefile';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -30,9 +31,15 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
     }),
+    viteSingleFile(),
   ],
   build: {
-    sourcemap: true,
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
   server: {
     port: 3005,

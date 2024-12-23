@@ -2,11 +2,11 @@
 
 #### Informed Consent Form and Privacy Policy (Farm Worker Version)
 
-Welcome to LiteFarm! We understand that your privacy and the protection of your data are important to you. We created this Informed Consent Form and Privacy Policy to help you understand how and when we collect, use and share your information, and to ensure we have your consent for doing so. Please keep in mind that you will need to consent separately to our collection and use of your data as described in this Informed Consent Form and Privacy Policy **for every farm that you are associated with via your account on the LiteFarm platform.** If you do not agree with our practices as outlined in this Informed Consent Form and Privacy Policy, you will not be able to use the LiteFarm platform.
+Welcome to Grow! We understand that your privacy and the protection of your data are important to you. We created this Informed Consent Form and Privacy Policy to help you understand how and when we collect, use and share your information, and to ensure we have your consent for doing so. Please keep in mind that you will need to consent separately to our collection and use of your data as described in this Informed Consent Form and Privacy Policy **for every farm that you are associated with via your account on the LiteFarm platform.** If you do not agree with our practices as outlined in this Informed Consent Form and Privacy Policy, you will not be able to use the LiteFarm platform.
 
-#### What is Litefarm?
+#### What is Grow?
 
-LiteFarm is a participatory science project developed to help improve access to digital agricultural technology for farming communities. LiteFarm aims to help farmers manage their farms in more profitable and environmentally and socially sustainable ways. The code underlying LiteFarm is free and open source (GPLv3) so that researchers, experts, and developers across the world can help to improve the services offered to the farming community. LiteFarm is a non-commercial entity. We aim to serve the farming community through improving agricultural decision-support and research.
+Grow is based on Litefarm which is a participatory science project developed to help improve access to digital agricultural technology for farming communities. LiteFarm aims to help farmers manage their farms in more profitable and environmentally and socially sustainable ways. The code underlying LiteFarm is free and open source (GPLv3) so that researchers, experts, and developers across the world can help to improve the services offered to the farming community. LiteFarm is a non-commercial entity. We aim to serve the farming community through improving agricultural decision-support and research.
 
 #### Who is the Litefarm team?
 

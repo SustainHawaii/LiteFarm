@@ -14,7 +14,7 @@ The Grow team is a cross-disciplinary group of scientists, researchers, farmers,
 
 #### Who funds Grow?
 
-Grow is funded by the Susttainhawaii.org
+Grow is funded by Sustainhawaii.org
 
 #### What data do we collect?
 
